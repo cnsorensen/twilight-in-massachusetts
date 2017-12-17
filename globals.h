@@ -15,7 +15,15 @@ extern TextColor TC_CYAN;
 extern TextColor TC_WHITE;
 extern TextColor TextColors[8];
 
-#define CLEARSCREEN() {fprintf(stdout, "\033[H\033[J");}
-#define ENTER() { char RET[3]; fprintf(stdout, "%s\nPress Enter to continue.", TC_NORM); fgets(RET, 3, stdin); }
+extern void CLEARSCREEN();
+extern void ENTER();
+
+//extern const int PLOT_COUNT;
+typedef void (*Plot)();
+extern Plot PLOTS[5];
+
+extern int PLOT_FLAGS[5];
+
+extern int SARAHG_SAT;
 
 #endif //__GLOBALS_H__

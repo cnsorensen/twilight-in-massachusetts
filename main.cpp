@@ -4,6 +4,8 @@
 //#include "person.h"
 //#include "persons.h"
 #include "game.h"
+#include "plot.h"
+#include "globals.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,35 +14,37 @@
 
 using namespace std;
 
-
 int main(int argc, char* argv[])
 {
     // return value from user input
-    char ret[2]; 
+    char ret[3]; 
+    char* err;
 
 /*#ifdef DEBUG
+    // printing out colors
     for(int i = 0; i < 8; i++)
     {
         fprintf(stdout, "%scolor\n", TextColors[i]);
     }
-    Person JonDoe("Jon", "Doe", TC_RED, 69);
-    fprintf(stdout, "%s%s %s: I'm %d\n", JonDoe.GetTextColor(),
-            JonDoe.GetFirstName(), JonDoe.GetLastName(), 
-            JonDoe.GetAge());
-    ChristineS.Speak("Hello world!!", 0);
-    StevieN.Speak("Hey yall", 1);
-    fprintf(stdout, "%d\n", ChristineS.GetAge());
 //#endif //DEBUG*/
-
     // initiate game
     CLEARSCREEN();
-    Game TwiInMass("Twilight in Massechusetts", TC_YELLOW);
+
+    Game TwiInMass("Twilight in Massachusetts");
+
+    // load game if given a game file
+    if(argc == 2)
+    {
+        fprintf(stdout, "Loading game...\n");
+        TwiInMass.LoadGame(argv[1]);
+    }
+
     // FIXME: animation?
-    TwiInMass.PrintTitle();
+    TwiInMass.PrintTitle(TC_YELLOW);
     
-    // FIXME: Figure out savegame password
+    // FIXME: Figure out savegame
     fprintf(stdout, "\n%sPress Enter to continue", TC_NORM);
-    fgets(ret, 3, stdin);
+    err = fgets(ret, 3, stdin);
     CLEARSCREEN();
  
     /*if(ret[0] != '\n')

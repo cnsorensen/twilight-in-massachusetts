@@ -15,8 +15,8 @@ LINK = g++
 # Preprocessor and compiler flags (turn on warning, optimization, and debugging):
 # CPPFLAGS = <preprocessor flags go here>
 
-#CFLAGS = -Wall -O -g -std=c++0x
-CFLAGS = -Wall -O -g
+CFLAGS =
+#CFLAGS = -Wall -O -g
 CXXFLAGS = $(CFLAGS)
 
 #------------------------------------------------------------------------------

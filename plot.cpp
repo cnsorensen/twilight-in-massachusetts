@@ -1,5 +1,6 @@
 // plot.cpp
 
+#include "game.h"
 #include "plot.h"
 #include "persons.h"
 #include "places.h"
@@ -7,18 +8,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// FIXME: Add place descriptions
+// plot variables
+//int PLOT_FLAGS[5] = {0};
+//int SARAHG_SAT = 0;
 
-// global variables
-int PLOT_FLAGS[PLOT_COUNT] = {0};
-int SARAHG_SAT = 0;
+Plot PLOTS[5] = {Plot0, Plot1, Plot2, Plot3, Plot4};
 
 void Plot0()
 {
     // if the plot is being repeated
-    if(PLOT_FLAGS[4] == 1)
+    if(PLOT_FLAGS[0] == 1)
     {
-        fprintf(stdout, "%s%s-REPEATED PLOT\n", TC_RED, __PRETTY_FUNCTION__);
         return;
     }
 
@@ -47,15 +47,15 @@ Christine's first conversation with her new roommate Sarah
 */
 void Plot1()
 {
-    // if the plot is being repeated
-    if(PLOT_FLAGS[4] == 1)
-    {
-        fprintf(stdout, "%s%s-REPEATED PLOT\n", TC_RED, __PRETTY_FUNCTION__);
-        return;
-    }
-
     char ret1[3];
     char ret2[3];
+    char* err;
+
+    // if the plot is being repeated
+    if(PLOT_FLAGS[1] == 1)
+    {
+        return;
+    }
 
     // FIXME: Christine walks into her aparment and sees
     //        Sarah sitting on the bed opposite of what's
@@ -74,7 +74,7 @@ void Plot1()
     ChristineS.Speak("I'm guessing this is my bed by the wall?", 0, 0, 2);
 
     fprintf(stdout, "\n%sChoose one: ", TC_NORM);   
-    fgets(ret1, 3, stdin);
+    err = fgets(ret1, 3, stdin);
     CLEARSCREEN();
     
     if(ret1[0] == '2')
@@ -98,7 +98,7 @@ void Plot1()
     ChristineS.Speak("I really don't know much about the trials.", 0, 0, 2);
 
     fprintf(stdout, "\n%sChoose one: ", TC_NORM);   
-    fgets(ret1, 3, stdin);
+    err = fgets(ret1, 3, stdin);
     CLEARSCREEN();
 
     if(ret1[0] == '2')
@@ -112,7 +112,7 @@ void Plot1()
         ChristineS.Speak("Sure, maybe after my first shift at the Witches Brew?", 0, 0, 2);
 
         fprintf(stdout, "\n%sChoose one: ", TC_NORM);   
-        fgets(ret2, 3, stdin);
+        err = fgets(ret2, 3, stdin);
         CLEARSCREEN();
 
         if(ret2[0] == '2')
@@ -142,35 +142,42 @@ void Plot1()
 
 void Plot2()
 {
+    char* err;
+    char ret1[3];
+    char ret2[3];    
+
     // if the plot is being repeated 
-    if(PLOT_FLAGS[4] == 1)
+    if(PLOT_FLAGS[2] == 1)
     {
-        fprintf(stdout, "%s%s-REPEATED PLOT\n", TC_RED, __PRETTY_FUNCTION__);
         return;
     }
 
-    char ret1[3];
-    char ret2[3];    
+    // debugging
+    fprintf(stdout, "Plot2\n");
 
     ENTER();
     CLEARSCREEN();
 
     PLOT_FLAGS[2] = 1;
 
+    //SaveGame();
+
     return;
 }
 
 void Plot3()
 {
+    char ret1[3];
+    char ret2[3];    
+
     // if the plot has been repeated
-    if(PLOT_FLAGS[4] == 1)
+    if(PLOT_FLAGS[3] == 1)
     {
-        fprintf(stdout, "%s%s-REPEATED PLOT\n", TC_RED, __PRETTY_FUNCTION__);
         return;
     }
 
-    char ret1[3];
-    char ret2[3];    
+    // debugging
+    fprintf(stdout, "Plot3\n");
 
     ENTER();
     CLEARSCREEN();
@@ -182,15 +189,17 @@ void Plot3()
 
 void Plot4()
 {
+    char ret1[3];
+    char ret2[3];    
+
     // if the plot is being repeated
     if(PLOT_FLAGS[4] == 1)
     {
-        fprintf(stdout, "%s%s-REPEATED PLOT\n", TC_RED, __PRETTY_FUNCTION__);
         return;
     }
 
-    char ret1[3];
-    char ret2[3];    
+    // debugging
+    fprintf(stdout, "Plot4\n");
 
     ENTER();
     CLEARSCREEN();
@@ -200,6 +209,5 @@ void Plot4()
     return;
 }
 
-Plot PLOTS[PLOT_COUNT] = {Plot0, Plot1, Plot2, Plot3, Plot4};
 
 

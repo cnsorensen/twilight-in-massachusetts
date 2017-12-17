@@ -3,21 +3,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "plot.h"
 #include "game.h"
+#include "plot.h"
+
 //#include "person.h"
 //#include "persons.h"
 //#include "place.h"
 
 Game :: Game()
 : m_title("")
-, m_textColor(TC_NORM)
 {
 }
 
-Game :: Game(char* title, TextColor textColor)
+Game :: Game(char* title)
 : m_title(title)
-, m_textColor(textColor)
 {
 }
 
@@ -37,22 +36,10 @@ char* Game :: GetTitle(void)
     return m_title;
 }
 
-int Game :: SetTextColor(TextColor textColor)
-{
-    m_textColor = textColor;
-
-    return 1;
-}
-
-TextColor Game :: GetTextColor(void)
-{
-    return m_textColor;
-}
-
 // functions
-void Game :: Run(void)
+void Game :: Run()
 {
-    for(int i = 0; i < PLOT_COUNT; i++)
+    for(int i = 0; i < 5; i++)
     {
         PLOTS[i]();
     }
@@ -60,10 +47,96 @@ void Game :: Run(void)
     return;
 }
 
-int Game :: PrintTitle(void)
+int Game :: PrintTitle(TextColor tc)
 {
     // FIXME: add some animation?
-    fprintf(stdout, "%s%s\n", m_textColor, m_title);
+    fprintf(stdout, "%s%s\n", tc, m_title);
     return 1;
 }
 
+void Game :: LoadGame(char* fileName)
+{
+    int i;
+    int val;
+    FILE* gameFile;
+
+    // open file
+    gameFile = fopen(fileName, "r");
+
+    // check if file opened
+    if(!gameFile)
+    {
+        fprintf(stdout, "%s%s - Unable to open file %s", TC_RED, 
+                __PRETTY_FUNCTION__, fileName);
+        return;
+    }
+
+    // grab values from file
+    val = -1;
+    for(int i = 0; i < 5; i++)
+    {
+        fscanf(gameFile, "%d", &val);
+
+        PLOT_FLAGS[i] = val;
+
+        if(feof(gameFile))
+        {
+            fprintf(stdout, "%s%s - Invalid file %s", TC_RED,
+                    __PRETTY_FUNCTION__, fileName);
+            return;
+        }
+
+        // debugging
+        fprintf(stdout, "%d ", val);
+    }
+
+    // get sat points
+    fscanf(gameFile, "%d", &val);
+    SARAHG_SAT = val;
+
+    // debugging
+    fprintf(stdout, "%d\n", val);
+
+    // close gamefile
+    fclose(gameFile);
+
+    return;
+}
+
+void Game :: SaveGame(void)
+{
+    int i;
+    int val;
+    FILE* gameFile;
+
+    // open file
+    gameFile = fopen("file.service", "w");
+
+    // check if file opened
+    if(!gameFile)
+    {
+        fprintf(stdout, "%s%s - Unable to open file %s", TC_RED, 
+                __PRETTY_FUNCTION__, "gamesave.txt");
+        return;
+    }
+
+    // grab values from file
+    val = -1;
+    for(int i = 0; i < 5; i++)
+    {
+        val = PLOT_FLAGS[i];
+        fprintf(gameFile, "%d\n", val);
+    }
+
+    // put sat points
+    SARAHG_SAT = val;
+    fprintf(gameFile, "%d\n", &val);
+
+    // debugging
+    fprintf(stdout, "%d\n", val);
+
+    // close gamefile
+    fclose(gameFile);
+
+    return;
+}

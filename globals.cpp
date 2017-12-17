@@ -20,3 +20,27 @@ TextColor TC_WHITE = "\x1B[37m";
 
 TextColor TextColors[8] = {TC_NORM, TC_RED, TC_GREEN, TC_YELLOW, 
                            TC_BLUE, TC_PURPLE, TC_CYAN, TC_WHITE};
+
+//const int PLOT_COUNT;
+
+// flags for each convo
+int PLOT_FLAGS[5] = {0};
+
+// satisfaction points
+int SARAHG_SAT = 0;
+
+void CLEARSCREEN()
+{
+    fprintf(stdout, "\033[H\033[J");
+
+    return;
+}
+
+void ENTER()
+{
+    char RET[3];
+    fprintf(stdout, "%s\nPress Enter to continue.", TC_NORM); 
+    fgets(RET, 3, stdin); 
+
+    return;
+}
