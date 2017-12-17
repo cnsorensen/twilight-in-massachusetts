@@ -15,7 +15,7 @@ Game :: Game()
 {
 }
 
-Game :: Game(char* title)
+Game :: Game(const char* title)
 : m_title(title)
 {
 }
@@ -25,13 +25,13 @@ Game :: ~Game()
 }
 
 // setters and getters
-int Game :: SetTitle(char* title)
+int Game :: SetTitle(const char* title)
 {
     m_title = title;
     return 1;
 }
 
-char* Game :: GetTitle(void)
+const char* Game :: GetTitle(void)
 {
     return m_title;
 }
@@ -54,7 +54,7 @@ int Game :: PrintTitle(TextColor tc)
     return 1;
 }
 
-void Game :: LoadGame(char* fileName)
+void Game :: LoadGame(const char* fileName)
 {
     int i;
     int val;
@@ -130,7 +130,7 @@ void Game :: SaveGame(void)
 
     // put sat points
     SARAHG_SAT = val;
-    fprintf(gameFile, "%d\n", &val);
+    fprintf(gameFile, "%d\n", val);
 
     // debugging
     fprintf(stdout, "%d\n", val);

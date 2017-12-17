@@ -7,33 +7,33 @@ class Person
 {
 public:
     Person();
-    Person(char*, char*, TextColor, int, char*, char*);
+    Person(const char*, const char*, TextColor, int, const char*, const char*);
     ~Person();
 
     // setters and getters
-    int SetFirstName(char*);
-    char* GetFirstName(void);
-    int SetLastName(char*);
-    char* GetLastName(void);
+    int SetFirstName(const char*);
+    const char* GetFirstName(void);
+    int SetLastName(const char*);
+    const char* GetLastName(void);
     int SetTextColor(TextColor);
     TextColor GetTextColor(void);
     int SetAge(int);
     int GetAge(void);
-    int SetHello(char*);
-    char* GetHello(void);
-    int SetGoodbye(char*);
-    char* GetGoodbye(void); 
+    int SetHello(const char*);
+    const char* GetHello(void);
+    int SetGoodbye(const char*);
+    const char* GetGoodbye(void); 
 
     // functions
-    int Speak(char*, int, int, int);
+    int Speak(const char*, int, int, int);
 
 private:
-    char* m_fName;
-    char* m_lName;
+    const char* m_fName;
+    const char* m_lName;
     TextColor m_textColor; 
     int m_age;
-    char* m_hello;
-    char* m_goodbye;
+    const char* m_hello;
+    const char* m_goodbye;
     // should we have some flag
     // for if they are at the
     // current place

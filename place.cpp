@@ -11,7 +11,7 @@ Place :: Place()
 {
 }
 
-Place :: Place(char* name, TextColor placeColor)
+Place :: Place(const char* name, TextColor placeColor)
 : m_name(name)
 , m_placeColor(placeColor)
 {
@@ -23,13 +23,13 @@ Place :: ~Place()
 
 // setters and getters
 
-int Place :: SetName(char* name)
+int Place :: SetName(const char* name)
 {
     m_name = name;
     return 1;
 }
 
-char* Place :: GetName(void)
+const char* Place :: GetName(void)
 {
     return m_name;
 }
@@ -45,7 +45,7 @@ TextColor Place :: GetPlaceColor(void)
     return m_placeColor;
 }
 
-void Place :: PrintPlaceDescription(char* description)
+void Place :: PrintPlaceDescription(const char* description)
 {
     fprintf(stdout, "%s\n%s\n", m_placeColor, description);
     return;

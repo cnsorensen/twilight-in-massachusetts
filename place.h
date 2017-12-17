@@ -10,19 +10,19 @@ class Place
 public:
 
     Place();
-    Place(char*, TextColor);
+    Place(const char*, TextColor);
     ~Place();
 
     // setters and getters
-    int SetName(char*);
-    char* GetName(void);
+    int SetName(const char*);
+    const char* GetName(void);
     int SetPlaceColor(TextColor);
     TextColor GetPlaceColor(void);
 
-    void PrintPlaceDescription(char*);
+    void PrintPlaceDescription(const char*);
 
 private:
-    char* m_name;
+    const char* m_name;
     TextColor m_placeColor;
     // should we have a place type or something?
     // need some more characteristics

@@ -4,7 +4,7 @@
 #define __GLOBALS_H__
 
 // text colors for dialog
-typedef char* TextColor;
+typedef const char* TextColor;
 extern TextColor TC_NORM;
 extern TextColor TC_RED;
 extern TextColor TC_GREEN;

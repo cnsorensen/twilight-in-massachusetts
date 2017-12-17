@@ -10,19 +10,19 @@ class Game
 public: // functions
 
     Game();
-    Game(char*);
+    Game(const char*);
     ~Game();
 
     // setters and getters
-    int SetTitle(char*);
-    char* GetTitle(void);
+    int SetTitle(const char*);
+    const char* GetTitle(void);
 
     // functions
     // move places()?
     // moveTo(place)?
     void Run();
     int PrintTitle(TextColor);
-    void LoadGame(char*);
+    void LoadGame(const char*);
     void SaveGame(void);
  
 public: // variables
@@ -30,7 +30,7 @@ public: // variables
     // i need something to hold plot line and dialogs??    
 
 private:
-    char* m_title;
+    const char* m_title;
 };
 
 #endif //__GAME_H__

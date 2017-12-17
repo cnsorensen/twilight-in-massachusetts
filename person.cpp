@@ -18,7 +18,7 @@ Person :: Person()
 {
 }
 
-Person :: Person(char* fName, char* lName, TextColor textColor, int age, char* hello, char* bye)
+Person :: Person(const char* fName, const char* lName, TextColor textColor, int age, const char* hello, const char* bye)
 : m_fName(fName)
 , m_lName(lName)
 , m_textColor(textColor)
@@ -36,26 +36,26 @@ Person :: ~Person()
 
 // setters and getters
 
-int Person :: SetFirstName(char* fName)
+int Person :: SetFirstName(const char* fName)
 {
     m_fName = fName;
 
     return 1;
 }
 
-char* Person :: GetFirstName(void)
+const char* Person :: GetFirstName(void)
 {
     return m_fName;
 }
 
-int Person :: SetLastName(char* lName)
+int Person :: SetLastName(const char* lName)
 {
     m_lName = lName;
 
     return 1;
 }
 
-char* Person :: GetLastName(void)
+const char* Person :: GetLastName(void)
 {
     return m_lName;
 }
@@ -84,33 +84,33 @@ int Person :: GetAge(void)
     return m_age;
 }
 
-int Person :: SetHello(char* hello)
+int Person :: SetHello(const char* hello)
 {
     // FIXME: make array of hellos and randomnly pick one
     m_hello = hello;
     return 1;
 }
 
-char* Person :: GetHello(void)
+const char* Person :: GetHello(void)
 {
     return m_hello;
 }
 
-int Person :: SetGoodbye(char* bye)
+int Person :: SetGoodbye(const char* bye)
 {
     // FIXME: make array of byes and randomly pick one
     m_goodbye = bye;
     return 1;
 }
 
-char* Person :: GetGoodbye(void)
+const char* Person :: GetGoodbye(void)
 {
     return m_goodbye;
 }
 
 // FIXME: other
 
-int Person :: Speak(char* dialog, int name_f, int type_f, int reply_num)
+int Person :: Speak(const char* dialog, int name_f, int type_f, int reply_num)
 {
     int len;
     len = strlen(dialog);
