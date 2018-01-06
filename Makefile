@@ -2,24 +2,42 @@
 # Chrissy Sorensen
 
 # C++ compiler and linker
-CPP_LINK = g++
-CPP_FLAGS = -Wall -O -g
-CXXFLAGS = $(CPP_FLAGS)
+CC := g++
+LD := g++
+CXXFLAGS = -Wall -O -g
 
 # OpenGL libraries
 GL_LIBS = -lglut -lGLU -lGL -lm
 
-SOURCE_DIR = src
-SOURCE_FILES = main.cpp globals.cpp game.cpp person.cpp persons.cpp place.cpp \
-places.cpp plot.cpp
+SRC_DIR := src
+BUILD_DIR := build
 
+#SOURCE_FILES = main.cpp globals.cpp callbacks.cpp game.cpp person.cpp persons.cpp place.cpp places.cpp plot.cpp
 
-# Targets
+SRC := $(foreach sdir,$(SRC_DIR),$(wildcard $(sdir)/*.cpp))
+OBJ := $(patsubst src/%.cpp,build/%.o,$(SRC))
+INCLUDES := $(addprefix -I,$(SRC_DIR))
 
-all: cs-twilightinmass
+vpath %.cpp $(SRC_DIR)
 
-cs-twilightinmass: $(SOURCE_FILES:.cpp=.o)
-	$(CPP_LINK) $(CPP_FLAGS) -o $@ $^ $(GL_LIBS)
-    
+define make-goal
+$1/%.o: %.cpp
+	$(CC) $(INCLUDES) -c $$< -o $$@ $(CXXFLAGS)
+endef
+
+.PHONY: all checkdirs clean
+
+all: checkdirs build/cs-twilightinmass
+
+build/cs-twilightinmass: $(OBJ)
+	$(LD) $^ -o $@ $(GL_LIBS) $(CXXFLAGS)
+
+checkdirs: $(BUILD_DIR)
+
+$(BUILD_DIR):
+	@mkdir -p $@
+
 clean:
-	@rm -f $(SOURCE_FILES:.cpp=.o) *~ core cs-twilightinmass
+	@rm -rf $(BUILD_DIR)
+
+$(foreach bdir,$(BUILD_DIR),$(eval $(call make-goal,$(bdir))))
