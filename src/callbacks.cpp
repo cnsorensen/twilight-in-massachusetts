@@ -1,5 +1,7 @@
 /* callbacks.cpp */
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <GL/freeglut.h>
 #include "callbacks.h"
 #include "places.h"
@@ -19,7 +21,7 @@ void display( void )
     glClear( GL_COLOR_BUFFER_BIT );
 
     // draw background
-    //glTexImage2D(GL_TEXTURE_RECTANGLE, 0, ScreenWidth, ScreenHeight, 0, GL_BGRA_INTEGER, GL_BYTE,
+    //glTexImage2D(GL_TEXTURE_RECTANGLE, 0, SCREENWIDTH, SCREENHEIGHT, 0, GL_BGRA_INTEGER, GL_BYTE,
 
     // should do an implicit glFlush()
     glutSwapBuffers();
@@ -45,7 +47,7 @@ parameters:     w - the desired window width
 void reshape(int w, int h)
 {
     // nice try, bucko. No reshaping window.
-    glutReshapeWindow(ScreenWidth, ScreenHeight);
+    glutReshapeWindow(SCREENWIDTH, SCREENHEIGHT);
 
     // how to project 3-D scene onto 2-D
     // use an orthographic projection
@@ -74,7 +76,7 @@ parameters:     key - the character value of the key pressed
 void keyboard(unsigned char key, int x, int y)
 {
     //correct for upside-down screen coordinates
-    y = ScreenHeight - y;
+    y = SCREENHEIGHT - y;
 
     switch(key)
     {
@@ -115,7 +117,7 @@ void mouseclick(int button, int state, int x, int y)
     int greeneggs;
 
     //correct for upside-down screen coordinates
-    y = ScreenHeight - y;
+    y = SCREENHEIGHT - y;
 
     // handle mouse click events
     switch( button )
@@ -156,7 +158,7 @@ void mouseclick(int button, int state, int x, int y)
 void mousedragpassive( int x, int y )
 {
     // correct the y coordinate
-    y = ScreenHeight - y;
+    y = SCREENHEIGHT - y;
 
     // refresh display
     glutPostRedisplay();
@@ -166,7 +168,7 @@ void mousedragpassive( int x, int y )
 void mousedrag( int x, int y )
 {
     // correct the y coordinate
-    y = ScreenHeight - y;
+    y = SCREENHEIGHT - y;
     
     // refresh display
     glutPostRedisplay();

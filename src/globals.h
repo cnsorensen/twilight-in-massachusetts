@@ -29,7 +29,11 @@ extern int PLOT_FLAGS[5];
 extern int SARAHG_SAT;
 
 // OpenGL globals
-extern const int ScreenWidth;
-extern const int ScreenHeight;
+extern const int SCREENWIDTH;
+extern const int SCREENHEIGHT;
+
+// other globals
+extern const int DAYTIME;
+extern const int NIGHTTIME;
 
 #endif //__GLOBALS_H__

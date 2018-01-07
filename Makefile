@@ -1,5 +1,4 @@
 # Makefile
-# Chrissy Sorensen
 
 # C++ compiler and linker
 CC := g++

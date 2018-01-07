@@ -19,7 +19,7 @@ void InitOpenGL(void)
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 
     // windowsize, position, and title
-    glutInitWindowSize(ScreenWidth, ScreenHeight);
+    glutInitWindowSize(SCREENWIDTH, SCREENHEIGHT);
     glutInitWindowPosition(100, 50);
     glutCreateWindow("Twilight in Massachusetts");
 

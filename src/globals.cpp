@@ -50,6 +50,10 @@ int PLOT_FLAGS[5] = {0};
 int SARAHG_SAT = 0;
 
 // OpenGL globals
-const int ScreenWidth = 720;
-const int ScreenHeight = 480;
+const int SCREENWIDTH = 720;
+const int SCREENHEIGHT = 480;
+
+// other globals
+const int DAYTIME = 0;
+const int NIGHTTIME = 1;
 

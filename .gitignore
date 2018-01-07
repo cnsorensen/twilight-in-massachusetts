@@ -2,3 +2,5 @@
 *.swp
 cs-twilightinmass
 *.game
+examples/*
+examples
