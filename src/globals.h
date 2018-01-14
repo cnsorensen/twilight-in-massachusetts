@@ -35,5 +35,6 @@ extern const int SCREENHEIGHT;
 // other globals
 extern const int DAYTIME;
 extern const int NIGHTTIME;
+extern int SELECT_FLAG;
 
 #endif //__GLOBALS_H__

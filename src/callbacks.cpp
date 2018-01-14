@@ -15,10 +15,13 @@ Place CurrentLocation;
 **********************************************************************
 display provides OpenGL
 **********************************************************************/
-void display( void )
+void display(void)
 {
     // clear the display
-    glClear( GL_COLOR_BUFFER_BIT );
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    Downtown.LoadBackground(DAYTIME);
+    Downtown.DrawBackground();
 
     // draw background
     //glTexImage2D(GL_TEXTURE_RECTANGLE, 0, SCREENWIDTH, SCREENHEIGHT, 0, GL_BGRA_INTEGER, GL_BYTE,
@@ -51,13 +54,13 @@ void reshape(int w, int h)
 
     // how to project 3-D scene onto 2-D
     // use an orthographic projection
-    //glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_PROJECTION);
     // Initailze transformation matrix
-    //glLoadIdentity();
+    glLoadIdentity();
     // Make OpenGL coordinates
-    //gluOrtho2D(0.0, w, 0.0, h);
+    gluOrtho2D(0.0, w, 0.0, h);
     // the same as the screen coordinates
-    //glViewport(0, 0, w, h);   
+    glViewport(0, 0, w, h);   
 }
 
 /**********************************************************************
@@ -126,8 +129,17 @@ void mouseclick(int button, int state, int x, int y)
         case GLUT_LEFT_BUTTON:
             // press
             if( state == GLUT_DOWN )
-            {    
-                greeneggs = 1;
+            {   // debugging - this changes cursor for each click
+                if(SELECT_FLAG == 1)
+                {
+                    glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
+                    SELECT_FLAG = 0;
+                }
+                else
+                {
+                    glutSetCursor(GLUT_CURSOR_INFO);
+                    SELECT_FLAG = 1;
+                }
             }
             // release
             else if( state == GLUT_UP )

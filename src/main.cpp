@@ -15,13 +15,23 @@
 
 void InitOpenGL(void)
 {
-    // 32-bit graphics and FIXME:(single??) buffering
-    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
+    // 32-bit graphics and single buffering
+    glutInitDisplayMode(GLUT_RGBA | GLUT_SINGLE);
 
     // windowsize, position, and title
     glutInitWindowSize(SCREENWIDTH, SCREENHEIGHT);
     glutInitWindowPosition(100, 50);
     glutCreateWindow("Twilight in Massachusetts");
+
+    // set cursor image
+    if(SELECT_FLAG)
+    {
+        glutSetCursor(GLUT_CURSOR_INFO);
+    }
+    else
+    {
+        glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
+    }
 
     // black background
     glClearColor(0.0, 0.0, 0.0, 0.0);

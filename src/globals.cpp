@@ -57,3 +57,4 @@ const int SCREENHEIGHT = 480;
 const int DAYTIME = 0;
 const int NIGHTTIME = 1;
 
+int SELECT_FLAG = 0;
