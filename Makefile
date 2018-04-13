@@ -30,6 +30,7 @@ all: checkdirs build/cs-twilightinmass
 
 build/cs-twilightinmass: $(OBJ)
 	$(LD) $^ -o $@ $(GL_LIBS) $(CXXFLAGS)
+	ln -s $@ cs-twilightinmass
 
 checkdirs: $(BUILD_DIR)
 
@@ -37,6 +38,6 @@ $(BUILD_DIR):
 	@mkdir -p $@
 
 clean:
-	@rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR) cs-twilightinmass
 
 $(foreach bdir,$(BUILD_DIR),$(eval $(call make-goal,$(bdir))))
