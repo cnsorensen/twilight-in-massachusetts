@@ -7,7 +7,7 @@ class Person
 {
 public:
     Person();
-    Person(const char*, const char*, TextColor, int, const char*, const char*);
+    Person(const char*, const char*, int, const char*, const char*);
     ~Person();
 
     // setters and getters
@@ -15,8 +15,8 @@ public:
     const char* GetFirstName(void);
     int SetLastName(const char*);
     const char* GetLastName(void);
-    int SetTextColor(TextColor);
-    TextColor GetTextColor(void);
+    //int SetTextColor(TextColor);
+    //TextColor GetTextColor(void);
     int SetAge(int);
     int GetAge(void);
     int SetHello(const char*);
@@ -25,12 +25,12 @@ public:
     const char* GetGoodbye(void); 
 
     // functions
-    int Speak(const char*, int, int, int);
+    //int Speak(const char*, int, int, int);
 
 private:
     const char* m_fName;
     const char* m_lName;
-    TextColor m_textColor; 
+    //TextColor m_textColor; 
     int m_age;
     const char* m_hello;
     const char* m_goodbye;

@@ -13,6 +13,30 @@
 #include <string.h>
 #include <GL/freeglut.h>
 
+/*
+Loads all backgrounds, characters, objects, and etc...
+*/
+void InitGame(void)
+{
+    // Load all backgrounds
+    Downtown.LoadBackground(DAYTIME);
+    Downtown.LoadBackground(NIGHTTIME);
+    //WitchesBrew.LoadBackground(DAYTIME);
+    //WitchesBrew.LoadBackground(NIGHTTIME);
+    ApartmentFull.LoadBackground(DAYTIME);
+    ApartmentFull.LoadBackground(NIGHTTIME);
+    ApartmentSarah.LoadBackground(DAYTIME);
+    ApartmentSarah.LoadBackground(NIGHTTIME);
+    //SalemU.LoadBackground(DAYTIME);
+    //SalemU.LoadBackground(NIGHTTIME);
+
+    // Load characters
+
+    // Load objects
+
+    return;
+}
+
 void InitOpenGL(void)
 {
     // 32-bit graphics and single buffering
@@ -61,32 +85,10 @@ void InitOpenGL(void)
 
 int main(int argc, char* argv[])
 {
-    // return value from user input
-    char ret[3]; 
-    char* err;
-
-    // initiate game
-    //CLEARSCREEN();
-
-    //Game TwiInMass("Twilight in Massachusetts");
-
     // FIXME: load game if given a game file
-    /*if(argc == 2)
-    {
-        fprintf(stdout, "Loading game...\n");
-        TwiInMass.LoadGame(argv[1]);
-    }*/
-
-    // FIXME: animation?
-    //TwiInMass.PrintTitle(TC_YELLOW);
     
-    // FIXME: Figure out savegame
-    //fprintf(stdout, "\n%sPress Enter to continue", TC_NORM);
-    //err = fgets(ret, 3, stdin);
-    //CLEARSCREEN();
- 
-    // start game
-    //TwiInMass.Run();
+    // initialize game
+    InitGame();
 
     // OpenGL init
     glutInit(&argc, argv);

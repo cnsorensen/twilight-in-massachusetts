@@ -7,7 +7,7 @@
 
 // list of places
 extern Place Downtown;
-extern Place WitchsBrew;
+extern Place WitchesBrew;
 extern Place ApartmentFull;
 extern Place ApartmentSarah;
 extern Place SalemU;

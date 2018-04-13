@@ -21,7 +21,6 @@ public: // functions
     // move places()?
     // moveTo(place)?
     void Run();
-    int PrintTitle(TextColor);
     void LoadGame(const char*);
     void SaveGame(void);
  

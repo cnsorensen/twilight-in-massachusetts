@@ -20,11 +20,9 @@ void display(void)
     // clear the display
     glClear(GL_COLOR_BUFFER_BIT);
 
-    Downtown.LoadBackground(DAYTIME);
+    // draw background based on current location
+    // FIXME: add some sort of switch here
     Downtown.DrawBackground();
-
-    // draw background
-    //glTexImage2D(GL_TEXTURE_RECTANGLE, 0, SCREENWIDTH, SCREENHEIGHT, 0, GL_BGRA_INTEGER, GL_BYTE,
 
     // should do an implicit glFlush()
     glutSwapBuffers();
@@ -125,11 +123,10 @@ void mouseclick(int button, int state, int x, int y)
     // handle mouse click events
     switch( button )
     {
-    // left button: create objects, select border color, select shape
         case GLUT_LEFT_BUTTON:
             // press
             if( state == GLUT_DOWN )
-            {   // debugging - this changes cursor for each click
+            {   // FIXME: this changes cursor for each click, figure out future mouse icon
                 if(SELECT_FLAG == 1)
                 {
                     glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
@@ -144,10 +141,10 @@ void mouseclick(int button, int state, int x, int y)
             // release
             else if( state == GLUT_UP )
             {
-                greeneggs = 2;
+                // I do not like them, Sam-I-Am
+                greeneggs = 1;
             }
             break;
-        // right button: select fill color
         case GLUT_RIGHT_BUTTON:
             // press
             if( state == GLUT_DOWN )
@@ -159,6 +156,8 @@ void mouseclick(int button, int state, int x, int y)
             {
                 greeneggs = 1;
             }
+            break;
+        default:
             break;
     }
     

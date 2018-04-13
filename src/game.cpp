@@ -39,19 +39,12 @@ const char* Game :: GetTitle(void)
 // functions
 void Game :: Run()
 {
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < 2; i++)
     {
         PLOTS[i]();
     }
 
     return;
-}
-
-int Game :: PrintTitle(TextColor tc)
-{
-    // FIXME: add some animation?
-    fprintf(stdout, "%s%s\n", tc, m_title);
-    return 1;
 }
 
 void Game :: LoadGame(const char* fileName)
@@ -66,23 +59,21 @@ void Game :: LoadGame(const char* fileName)
     // check if file opened
     if(!gameFile)
     {
-        fprintf(stdout, "%s%s - Unable to open file %s", TC_RED, 
-                __PRETTY_FUNCTION__, fileName);
+        fprintf(stdout, "%s - Unable to open file %s", __PRETTY_FUNCTION__, fileName);
         return;
     }
 
     // grab values from file
     val = -1;
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < 2; i++)
     {
         fscanf(gameFile, "%d", &val);
 
-        PLOT_FLAGS[i] = val;
+        //PLOT_FLAGS[i] = val;
 
         if(feof(gameFile))
         {
-            fprintf(stdout, "%s%s - Invalid file %s", TC_RED,
-                    __PRETTY_FUNCTION__, fileName);
+            fprintf(stdout, "%s - Invalid file %s", __PRETTY_FUNCTION__, fileName);
             return;
         }
 
@@ -115,16 +106,15 @@ void Game :: SaveGame(void)
     // check if file opened
     if(!gameFile)
     {
-        fprintf(stdout, "%s%s - Unable to open file %s", TC_RED, 
-                __PRETTY_FUNCTION__, "gamesave.txt");
+        fprintf(stdout, "%s - Unable to open file %s", __PRETTY_FUNCTION__, "gamesave.txt");
         return;
     }
 
     // grab values from file
     val = -1;
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < 2; i++)
     {
-        val = PLOT_FLAGS[i];
+        //val = PLOT_FLAGS[i];
         fprintf(gameFile, "%d\n", val);
     }
 

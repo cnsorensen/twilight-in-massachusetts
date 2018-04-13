@@ -5,16 +5,14 @@
 
 Place :: Place()
 : m_name("")
-, m_placeColor(TC_NORM)
 , m_dayBGroundFile("")
 , m_nightBGroundFile("")
 , m_imagePtr(NULL)
 {
 }
 
-Place :: Place(const char* name, TextColor placeColor, const char* dayBGroundFile, const char* nightBGroundFile, unsigned char* imagePtr)
+Place :: Place(const char* name, const char* dayBGroundFile, const char* nightBGroundFile, unsigned char* imagePtr)
 : m_name(name)
-, m_placeColor(placeColor)
 , m_dayBGroundFile(dayBGroundFile)
 , m_nightBGroundFile(nightBGroundFile)
 , m_imagePtr(imagePtr)
@@ -40,17 +38,6 @@ int Place :: SetName(const char* name)
 const char* Place :: GetName(void)
 {
     return m_name;
-}
-
-int Place :: SetPlaceColor(TextColor placeColor)
-{
-    m_placeColor = placeColor;
-    return 1;
-}
-
-TextColor Place :: GetPlaceColor(void)
-{
-    return m_placeColor;
 }
 
 int Place :: SetBGroundFile(const char* bGroundFile, int time)

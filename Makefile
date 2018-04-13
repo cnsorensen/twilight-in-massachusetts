@@ -30,6 +30,7 @@ all: checkdirs build/cs-twilightinmass
 
 build/cs-twilightinmass: $(OBJ)
 	$(LD) $^ -o $@ $(GL_LIBS) $(CXXFLAGS)
+	rm -f cs-twilightinmass
 	ln -s $@ cs-twilightinmass
 
 checkdirs: $(BUILD_DIR)

@@ -13,14 +13,12 @@ class Place
 public:
 
     Place();
-    Place(const char*, TextColor, const char*, const char*, unsigned char*);
+    Place(const char*, const char*, const char*, unsigned char*);
     ~Place();
 
     // setters and getters
     int SetName(const char*);
     const char* GetName(void);
-    int SetPlaceColor(TextColor);
-    TextColor GetPlaceColor(void);
     int SetBGroundFile(const char*, int);
     const char* GetBGroundFile(int);
 
@@ -30,11 +28,13 @@ public:
 
 private:
     const char* m_name;
-    TextColor m_placeColor;
     const char* m_dayBGroundFile;
     const char* m_nightBGroundFile;
     unsigned char* m_imagePtr;
+    // hotspots
 
+
+    // for loading background
     void SkipChars(FILE*, int);
     int GetNumBytesPerRow(int);
     int ReadLong(FILE*);

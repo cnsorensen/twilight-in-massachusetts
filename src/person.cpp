@@ -11,17 +11,15 @@
 Person :: Person()
 : m_fName("")
 , m_lName("")
-, m_textColor(TC_NORM)
 , m_age(-1)
 , m_hello("")
 , m_goodbye("")
 {
 }
 
-Person :: Person(const char* fName, const char* lName, TextColor textColor, int age, const char* hello, const char* bye)
+Person :: Person(const char* fName, const char* lName, int age, const char* hello, const char* bye)
 : m_fName(fName)
 , m_lName(lName)
-, m_textColor(textColor)
 , m_age(age)
 , m_hello(hello)
 , m_goodbye(bye)
@@ -60,18 +58,7 @@ const char* Person :: GetLastName(void)
     return m_lName;
 }
 
-int Person :: SetTextColor(TextColor textColor)
-{
-    m_textColor = textColor;
-
-    return 1;
-}
-
-TextColor Person :: GetTextColor(void)
-{
-    return m_textColor;
-}
-
+//FIXME: do we need this?
 int Person :: SetAge(int age)
 {
     m_age = age;
@@ -108,8 +95,8 @@ const char* Person :: GetGoodbye(void)
     return m_goodbye;
 }
 
-// FIXME: other
-
+// FIXME: need to implement
+/*
 int Person :: Speak(const char* dialog, int name_f, int type_f, int reply_num)
 {
     int len;
@@ -158,4 +145,4 @@ int Person :: Speak(const char* dialog, int name_f, int type_f, int reply_num)
  
     return 1;
 }
-
+*/
