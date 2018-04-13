@@ -24,4 +24,17 @@ extern const int DAYTIME;
 extern const int NIGHTTIME;
 extern int SELECT_FLAG;
 
+// id's for the places, used to check current location
+typedef int idPlace;
+extern const idPlace idNowhere;
+extern const idPlace idDowntown;
+extern const idPlace idWitchesBrew;
+extern const idPlace idApartmentFull;
+extern const idPlace idApartmentSarah;
+extern const idPlace idSalemU;
+extern idPlace currentPlace;
+
+// number of places
+extern const int PLACES_COUNT;
+
 #endif //__GLOBALS_H__

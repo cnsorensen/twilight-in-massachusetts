@@ -22,7 +22,8 @@ void display(void)
 
     // draw background based on current location
     // FIXME: add some sort of switch here
-    Downtown.DrawBackground();
+    //Downtown.DrawBackground();
+    Downtown.GoToLocation(DAYTIME);
 
     // should do an implicit glFlush()
     glutSwapBuffers();
@@ -121,11 +122,11 @@ void mouseclick(int button, int state, int x, int y)
     y = SCREENHEIGHT - y;
 
     // handle mouse click events
-    switch( button )
+    switch(button)
     {
         case GLUT_LEFT_BUTTON:
             // press
-            if( state == GLUT_DOWN )
+            if(state == GLUT_DOWN)
             {   // FIXME: this changes cursor for each click, figure out future mouse icon
                 if(SELECT_FLAG == 1)
                 {
@@ -139,7 +140,7 @@ void mouseclick(int button, int state, int x, int y)
                 }
             }
             // release
-            else if( state == GLUT_UP )
+            else if(state == GLUT_UP)
             {
                 // I do not like them, Sam-I-Am
                 greeneggs = 1;
@@ -147,12 +148,12 @@ void mouseclick(int button, int state, int x, int y)
             break;
         case GLUT_RIGHT_BUTTON:
             // press
-            if( state == GLUT_DOWN )
+            if(state == GLUT_DOWN)
             {
                 greeneggs = 1;
             }
             // release
-            else if( state == GLUT_UP )
+            else if(state == GLUT_UP)
             {
                 greeneggs = 1;
             }
@@ -166,17 +167,46 @@ void mouseclick(int button, int state, int x, int y)
 }
 
 /* when the mouse isn't pressed down */
-void mousedragpassive( int x, int y )
+void mousedragpassive(int x, int y)
 {
+    // FIXME: placeholder for between if's
+    int greeneggs;
+
     // correct the y coordinate
     y = SCREENHEIGHT - y;
+
+    // search for hotspots
+    if(currentPlace == idDowntown)
+    {
+        greeneggs = 2;        
+    }
+    else if(currentPlace == idWitchesBrew)
+    {
+        greeneggs = 2;        
+    }
+    else if(currentPlace == idApartmentFull)
+    {
+        greeneggs = 2;        
+    }
+    else if(currentPlace == idApartmentSarah)
+    {
+        greeneggs = 2;        
+    }
+    else if(currentPlace == idSalemU)
+    {
+        greeneggs = 2;        
+    }    
+    else
+    {
+        greeneggs = 2;
+    }
 
     // refresh display
     glutPostRedisplay();
 }
 
 /* when the mouse button is held down */
-void mousedrag( int x, int y )
+void mousedrag(int x, int y)
 {
     // correct the y coordinate
     y = SCREENHEIGHT - y;

@@ -7,23 +7,37 @@ Place :: Place()
 : m_name("")
 , m_dayBGroundFile("")
 , m_nightBGroundFile("")
-, m_imagePtr(NULL)
+, m_imagePtrDay(NULL)
+, m_imagePtrNight(NULL)
+, m_placeId(idNowhere)
+, m_hotspots(NULL)
+, m_hsCount(0)
 {
 }
 
-Place :: Place(const char* name, const char* dayBGroundFile, const char* nightBGroundFile, unsigned char* imagePtr)
+Place :: Place(const char* name, const char* dayBGroundFile, 
+               const char* nightBGroundFile, unsigned char* imagePtrDay,
+               unsigned char* imagePtrNight, idPlace placeId, Hotspot* hotspots, int hsCount)
 : m_name(name)
 , m_dayBGroundFile(dayBGroundFile)
 , m_nightBGroundFile(nightBGroundFile)
-, m_imagePtr(imagePtr)
+, m_imagePtrDay(imagePtrDay)
+, m_imagePtrNight(imagePtrNight)
+, m_placeId(placeId)
+, m_hotspots(hotspots)
+, m_hsCount(hsCount)
 {
 }
 
 Place :: ~Place()
 {
-    if(m_imagePtr != NULL)
+    if(m_imagePtrDay != NULL)
     {
-        delete m_imagePtr;
+        delete m_imagePtrDay;
+    }
+    if(m_imagePtrNight != NULL)
+    {
+        delete m_imagePtrNight;
     }
 }
 
@@ -66,19 +80,64 @@ const char* Place :: GetBGroundFile(int time)
     }
 }
 
+int Place :: AddHotspot(Hotspot h)
+{
+
+    m_hsCount++;
+    return -1;
+}
+
+int Place :: RemoveHotspot(Hotspot h)
+{
+
+    m_hsCount--;    
+    return -1;
+}
+
+void Place :: GoToLocation(int time)
+{
+    DrawBackground(time);
+    currentPlace = m_placeId;
+
+    return;
+}
+
+void Place :: CheckHotspotsHovered(int x, int y)
+{
+    for(int i = 0;i < m_hsCount; i++)
+    {
+        if(m_hotspots[i].CheckHovered(x, y))
+        {
+            //m_hotspots[i].Highlight();
+            //FIXME: do something here
+            printf("yay you hovered something!!\n");
+        }
+    }
+
+    return;
+}
 //Author: Sam Buss December 2001
 int Place :: LoadBackground(int time)
 {
     const char* filename;
 
     // select time of day
+    // delete current pointer if it has already been loaded
     if(time == NIGHTTIME)
     {
         filename = m_nightBGroundFile;
+        if(m_imagePtrNight != NULL)
+        {
+            delete m_imagePtrNight;
+        }
     }
     else // default to day
     {
         filename = m_dayBGroundFile;
+        if(m_imagePtrDay != NULL)
+        {
+            delete m_imagePtrDay;
+        }
     }
 
     // Open for reading binary data
@@ -128,55 +187,110 @@ int Place :: LoadBackground(int time)
         exit(0);
     }
 
-    // Allocate memory
-    m_imagePtr = new unsigned char[NumRows * GetNumBytesPerRow(NumCols)];
-    if(!m_imagePtr)
+    if(time == NIGHTTIME)
     {
-        fclose (infile);
-        fprintf(stderr, "%s: Unable to allocate memory for %s\n", __PRETTY_FUNCTION__, filename);
-        exit(0);
-    }
-
-    unsigned char* cPtr = m_imagePtr;
-    for(int i = 0; i < NumRows; i++)
-    {
-        for(int j = 0; j < NumCols; j++)
+        // Allocate memory
+        m_imagePtrNight = new unsigned char[NumRows * GetNumBytesPerRow(NumCols)];
+        if(!m_imagePtrNight)
         {
-            // blue, green, and red color value
-            *(cPtr + 2) = fgetc(infile);
-            *(cPtr + 1) = fgetc(infile);
-            *cPtr = fgetc(infile);
-            cPtr += 3;
+            fclose (infile);
+            fprintf(stderr, "%s: Unable to allocate memory for %s\n", __PRETTY_FUNCTION__, filename);
+            exit(0);
         }
 
- 		// Num bytes already read
-        int numBytes = GetNumBytesPerRow(NumCols);
-        int k = 3 * NumCols;
-        for(; k < numBytes; k++)
+        unsigned char* cPtr = m_imagePtrNight;
+        for(int i = 0; i < NumRows; i++)
         {
-			// Read and ignore padding;
-            fgetc(infile);
-            *(cPtr++) = 0;
+            for(int j = 0; j < NumCols; j++)
+            {
+                // blue, green, and red color value
+                *(cPtr + 2) = fgetc(infile);
+                *(cPtr + 1) = fgetc(infile);
+                *cPtr = fgetc(infile);
+                cPtr += 3;
+            }
+
+ 		    // Num bytes already read
+            int numBytes = GetNumBytesPerRow(NumCols);
+            int k = 3 * NumCols;
+            for(; k < numBytes; k++)
+            {
+			    // Read and ignore padding;
+                fgetc(infile);
+                *(cPtr++) = 0;
+            }
         }
-    }
 
-    if(feof(infile))
+        if(feof(infile))
+        {
+            fclose (infile);
+            fprintf(stderr, "%s: Premature end of file: %s.\n", __PRETTY_FUNCTION__, filename);
+            exit(0);
+        }
+
+        // Close the file
+        fclose(infile);
+    }
+    else // default to daytime
     {
-        fclose (infile);
-        fprintf(stderr, "%s: Premature end of file: %s.\n", __PRETTY_FUNCTION__, filename);
-        exit(0);
-    }
+        // Allocate memory
+        m_imagePtrDay = new unsigned char[NumRows * GetNumBytesPerRow(NumCols)];
+        if(!m_imagePtrDay)
+        {
+            fclose (infile);
+            fprintf(stderr, "%s: Unable to allocate memory for %s\n", __PRETTY_FUNCTION__, filename);
+            exit(0);
+        }
 
-    // Close the file
-    fclose(infile);
+        unsigned char* cPtr = m_imagePtrDay;
+        for(int i = 0; i < NumRows; i++)
+        {
+            for(int j = 0; j < NumCols; j++)
+            {
+                // blue, green, and red color value
+                *(cPtr + 2) = fgetc(infile);
+                *(cPtr + 1) = fgetc(infile);
+                *cPtr = fgetc(infile);
+                cPtr += 3;
+            }
+
+ 		    // Num bytes already read
+            int numBytes = GetNumBytesPerRow(NumCols);
+            int k = 3 * NumCols;
+            for(; k < numBytes; k++)
+            {
+			    // Read and ignore padding;
+                fgetc(infile);
+                *(cPtr++) = 0;
+            }
+        }
+
+        if(feof(infile))
+        {
+            fclose (infile);
+            fprintf(stderr, "%s: Premature end of file: %s.\n", __PRETTY_FUNCTION__, filename);
+            exit(0);
+        }
+
+        // Close the file
+        fclose(infile);
+    }
 
     return 1;
 }
 
-int Place :: DrawBackground(void)
+int Place :: DrawBackground(int time)
 {
     glRasterPos2i(0, 0);
-    glDrawPixels(SCREENWIDTH, SCREENHEIGHT, GL_RGB, GL_UNSIGNED_BYTE, m_imagePtr);
+    if(time == NIGHTTIME)
+    {
+        glDrawPixels(SCREENWIDTH, SCREENHEIGHT, GL_RGB, GL_UNSIGNED_BYTE, m_imagePtrNight);
+    }
+    else // default to daytime
+    {
+        glDrawPixels(SCREENWIDTH, SCREENHEIGHT, GL_RGB, GL_UNSIGNED_BYTE, m_imagePtrDay);
+
+    }
 
     return 1;
 }

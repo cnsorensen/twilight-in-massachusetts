@@ -18,6 +18,9 @@ Loads all backgrounds, characters, objects, and etc...
 */
 void InitGame(void)
 {
+    // initialize values
+    currentPlace = idNowhere;
+
     // Load all backgrounds
     Downtown.LoadBackground(DAYTIME);
     Downtown.LoadBackground(NIGHTTIME);

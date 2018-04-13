@@ -49,7 +49,7 @@ void Game :: Run()
 
 void Game :: LoadGame(const char* fileName)
 {
-    int i;
+    //int i;
     int val;
     FILE* gameFile;
 
@@ -96,7 +96,7 @@ void Game :: LoadGame(const char* fileName)
 
 void Game :: SaveGame(void)
 {
-    int i;
+    //int i;
     int val;
     FILE* gameFile;
 

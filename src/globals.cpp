@@ -26,3 +26,15 @@ const int DAYTIME = 0;
 const int NIGHTTIME = 1;
 
 int SELECT_FLAG = 0;
+
+// id's for places, used to check current location 
+const idPlace idNowhere = -1;
+const idPlace idDowntown = 0;
+const idPlace idWitchesBrew = 1;
+const idPlace idApartmentFull = 2;
+const idPlace idApartmentSarah = 3;
+const idPlace idSalemU = 4;
+idPlace currentPlace;
+
+// number of places
+const int PLACES_COUNT = 6;
