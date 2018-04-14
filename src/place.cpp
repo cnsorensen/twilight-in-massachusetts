@@ -10,14 +10,13 @@ Place :: Place()
 , m_imagePtrDay(NULL)
 , m_imagePtrNight(NULL)
 , m_placeId(idNowhere)
-, m_hotspots(NULL)
-, m_hsCount(0)
+, m_hotspots(std::vector<Hotspot>())
 {
 }
 
 Place :: Place(const char* name, const char* dayBGroundFile, 
                const char* nightBGroundFile, unsigned char* imagePtrDay,
-               unsigned char* imagePtrNight, idPlace placeId, Hotspot* hotspots, int hsCount)
+               unsigned char* imagePtrNight, idPlace placeId, std::vector<Hotspot> hotspots)
 : m_name(name)
 , m_dayBGroundFile(dayBGroundFile)
 , m_nightBGroundFile(nightBGroundFile)
@@ -25,7 +24,6 @@ Place :: Place(const char* name, const char* dayBGroundFile,
 , m_imagePtrNight(imagePtrNight)
 , m_placeId(placeId)
 , m_hotspots(hotspots)
-, m_hsCount(hsCount)
 {
 }
 
@@ -80,17 +78,32 @@ const char* Place :: GetBGroundFile(int time)
     }
 }
 
+// adds an existing hotspot to the list
 int Place :: AddHotspot(Hotspot h)
 {
+    std::vector<Hotspot>::iterator it;
+    it = m_hotspots.begin();
 
-    m_hsCount++;
-    return -1;
+    m_hotspots.push_back(h);
+ 
+	return 1;
+}
+
+// creates new hotspot before adding to the list of hotspots
+int Place :: AddHotspot(int x1, int y1, int x2, int y2)
+{
+    Hotspot t_hs(x1, y1, x2, y2);
+
+    std::vector<Hotspot>::iterator it;
+    it = m_hotspots.begin();
+
+    m_hotspots.push_back(t_hs);
+ 
+    return 1;
 }
 
 int Place :: RemoveHotspot(Hotspot h)
 {
-
-    m_hsCount--;    
     return -1;
 }
 
@@ -104,13 +117,20 @@ void Place :: GoToLocation(int time)
 
 void Place :: CheckHotspotsHovered(int x, int y)
 {
-    for(int i = 0;i < m_hsCount; i++)
+	// hotspots iterator
+    std::vector<Hotspot>::iterator it;
+
+    // check to see if cursor is hovered over a hotspot
+    // if so, set the flag for hover so the cursor symbol can change
+    for(it = m_hotspots.begin(); it != m_hotspots.end(); it++)
     {
-        if(m_hotspots[i].CheckHovered(x, y))
+        if(it->CheckHovered(x, y))
         {
-            //m_hotspots[i].Highlight();
-            //FIXME: do something here
-            printf("yay you hovered something!!\n");
+            HOVER_FLAG = 1;
+        }
+        else
+        {
+            HOVER_FLAG = 0;
         }
     }
 
@@ -294,7 +314,7 @@ int Place :: DrawBackground(int time)
 
     return 1;
 }
-// Author: Dr. John Weiss
+// Author: Dr. John Weiss, *THE* Weiss of the Weiss Distribution Method
 void Place :: SkipChars(FILE* infile, int numChars)
 {
     for(int i = 0; i < numChars; i++)

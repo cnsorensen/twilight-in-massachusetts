@@ -35,7 +35,10 @@ void InitGame(void)
 
     // Load characters
 
-    // Load objects
+    // Load hotspots
+    Downtown.AddHotspot(65, 215, 175, 65);
+
+		// Load objects
 
     return;
 }

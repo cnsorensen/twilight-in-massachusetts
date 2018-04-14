@@ -2,6 +2,8 @@
 
 #include "hotspot.h"
 
+#include <stdio.h>
+
 Hotspot :: Hotspot()
 : m_x1(0), m_y1(0)
 , m_x2(0), m_y2(0)
@@ -26,18 +28,16 @@ Hotspot :: ~Hotspot()
 
 int Hotspot :: CheckHovered(int x, int y)
 {
-    // check if x is outside of the x range
-    if(x < m_x1 || x > m_x2)
+    // check if x is inside of the x range
+    if(x >= m_x1 && x <= m_x2)
     {
-        return 0;
+        // check if y is inside of the y range
+        if(y <= m_y1 && y >= m_y2)
+        {
+            return 1;
+        }
     }
 
-    // check if y is out of the y range
-    if(y <= m_y1 || y > m_y2)
-    {
-        return 0;
-    }
-
-    // coordinate is withing both x and y range
-    return 1;
+    // coordinate is not within both x and y range
+    return 0;
 }

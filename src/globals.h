@@ -23,6 +23,7 @@ extern const int SCREENHEIGHT;
 extern const int DAYTIME;
 extern const int NIGHTTIME;
 extern int SELECT_FLAG;
+extern int HOVER_FLAG; // if the cursor is hovered over a hotspot
 
 // id's for the places, used to check current location
 typedef int idPlace;

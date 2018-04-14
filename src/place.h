@@ -8,6 +8,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <vector>
 
 class Place
 {
@@ -15,7 +16,7 @@ public:
 
     Place();
     Place(const char*, const char*, const char*, unsigned char*,
-          unsigned char*, idPlace, Hotspot*, int);
+          unsigned char*, idPlace, std::vector<Hotspot>);
     ~Place();
 
     // setters and getters
@@ -25,6 +26,7 @@ public:
     const char* GetBGroundFile(int);
 
     int AddHotspot(Hotspot);
+    int AddHotspot(int, int, int, int);
     int RemoveHotspot(Hotspot);
 
     int LoadBackground(int);
@@ -41,8 +43,7 @@ private:
     unsigned char* m_imagePtrDay;
     unsigned char* m_imagePtrNight;
     idPlace m_placeId;
-    Hotspot* m_hotspots;
-    int m_hsCount;
+    std::vector<Hotspot> m_hotspots;
 
     // for loading background
     void SkipChars(FILE*, int);

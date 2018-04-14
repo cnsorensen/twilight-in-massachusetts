@@ -127,16 +127,18 @@ void mouseclick(int button, int state, int x, int y)
         case GLUT_LEFT_BUTTON:
             // press
             if(state == GLUT_DOWN)
-            {   // FIXME: this changes cursor for each click, figure out future mouse icon
-                if(SELECT_FLAG == 1)
+            {
+                // FIXME: this is for debugging right now
+                printf("x:%d, y:%d\n", x, y);
+
+								// FIXME: do some sort of event here
+                if(HOVER_FLAG == 1)
                 {
-                    glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
-                    SELECT_FLAG = 0;
+                    printf("DO SOMETHING!!\n");
                 }
                 else
                 {
-                    glutSetCursor(GLUT_CURSOR_INFO);
-                    SELECT_FLAG = 1;
+                    greeneggs = 2;
                 }
             }
             // release
@@ -176,9 +178,18 @@ void mousedragpassive(int x, int y)
     y = SCREENHEIGHT - y;
 
     // search for hotspots
+		// change cursor icon based on where the cursor is currently located
     if(currentPlace == idDowntown)
     {
-        greeneggs = 2;        
+        Downtown.CheckHotspotsHovered(x, y);
+        if(HOVER_FLAG)
+        {
+            glutSetCursor(GLUT_CURSOR_INFO);
+        }
+        else
+        {
+            glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
+        }        
     }
     else if(currentPlace == idWitchesBrew)
     {
