@@ -68,6 +68,7 @@ void InitOpenGL(void)
     // aint no callaback routines
     //redisplay window
     glutDisplayFunc(display);
+    //glutIdleFunc(display); // do i need this?
 
     // resize
     glutReshapeFunc(reshape);

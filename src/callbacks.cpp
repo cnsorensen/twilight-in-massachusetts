@@ -22,29 +22,28 @@ void display(void)
 
     // draw background based on current location
     // FIXME: add some sort of switch here
-    //Downtown.DrawBackground(NIGHTTIME);
+
+	//FIXME: debugging
     if(TEMP_COUNT == 0)
     {
         printf("%d - %d\n", CURRENT_PLACE, idDowntown);
         TEMP_COUNT = 1;
     }
 
-    //if(CURRENT_PLACE = idDowntown)
-    if(1)
+    if(CURRENT_PLACE == idDowntown)
+    //if(1)
     {
         //printf("I am currently Downtown\n");
         //Downtown.GoToLocation(CURRENT_TIME);
         Downtown.DrawBackground(CURRENT_TIME);
-        //TEMP_COUNT = 0;
         //glutPostRedisplay();
     }
-    //else if(CURRENT_PLACE == idApartmentFull)
-    if(0)
+    else if(CURRENT_PLACE == idApartmentFull)
+    //if(0)
     {
         //printf("I amd currently at the apartment\n");
         //ApartmentFull.GoToLocation(CURRENT_TIME);
         ApartmentFull.DrawBackground(CURRENT_TIME);
-        //TEMP_COUNT = 0;
         //glutPostRedisplay();
     }
 
@@ -155,7 +154,7 @@ void mouseclick(int button, int state, int x, int y)
                 printf("x:%d, y:%d\n", x, y);
 
                 // FIXME: do some sort of event here
-                if(HOVER_FLAG == 1)
+                if(HOVER_FLAG)
                 {
                     printf("Flag is hovered\n");
                     if(CURRENT_PLACE == idDowntown)
@@ -164,9 +163,11 @@ void mouseclick(int button, int state, int x, int y)
                         // FIXME: need to figure out WHICH hotspot is selected (doing this for now)
                         // go to the apartment
                         //ApartmentFull.GoToLocation(DAYTIME);
-                        glDrawPixels(SCREENWIDTH, SCREENHEIGHT, GL_RGB,
-                                     GL_UNSIGNED_BYTE, ApartmentFull.GetImagePtrDay());
+                        //glDrawPixels(SCREENWIDTH, SCREENHEIGHT, GL_RGB,
+                        //             GL_UNSIGNED_BYTE, ApartmentFull.GetImagePtrDay());
+                        //glutSwapBuffers();
                         CURRENT_PLACE = idApartmentFull;
+                        TEMP_COUNT = 0;
                         greeneggs = 2;
                     }
                     else if(CURRENT_PLACE == idWitchesBrew)
@@ -252,7 +253,19 @@ void mousedragpassive(int x, int y)
     }
     else if(CURRENT_PLACE == idApartmentFull)
     {
-        greeneggs = 2;
+        // FIXME: need some way to know *which* hotspot was highlighted
+        // FIXME: Need to implement hotspots for apartment
+        //ApartmentFull.CheckHotspotsHovered(x, y);
+
+        HOVER_FLAG = 0;
+        if(HOVER_FLAG)
+        {
+            glutSetCursor(GLUT_CURSOR_INFO);
+        }
+        else
+        {
+            glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
+        }
     }
     else if(CURRENT_PLACE == idApartmentSarah)
     {
