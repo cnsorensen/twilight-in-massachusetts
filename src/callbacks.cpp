@@ -34,16 +34,16 @@ void display(void)
     //if(1)
     {
         //printf("I am currently Downtown\n");
-        //Downtown.GoToLocation(CURRENT_TIME);
-        Downtown.DrawBackground(CURRENT_TIME);
+        Downtown.GoToLocation(CURRENT_TIME);
+        //Downtown.DrawBackground(CURRENT_TIME);
         //glutPostRedisplay();
     }
     else if(CURRENT_PLACE == idApartmentFull)
     //if(0)
     {
         //printf("I amd currently at the apartment\n");
-        //ApartmentFull.GoToLocation(CURRENT_TIME);
-        ApartmentFull.DrawBackground(CURRENT_TIME);
+        ApartmentFull.GoToLocation(CURRENT_TIME);
+        //ApartmentFull.DrawBackground(CURRENT_TIME);
         //glutPostRedisplay();
     }
 
@@ -176,7 +176,15 @@ void mouseclick(int button, int state, int x, int y)
                     }
                     else if(CURRENT_PLACE == idApartmentFull)
                     {
-                        greeneggs = 2;
+                        // FIXME: figure out WHIDCH hotspot is selected
+                        if(CURRENT_TIME == DAYTIME)
+                        {
+                            CURRENT_TIME = NIGHTTIME;
+                        }
+                        else
+                        {
+                            CURRENT_TIME = DAYTIME;
+                        }
                     }
                     else if(CURRENT_PLACE == idApartmentSarah)
                     {
@@ -254,10 +262,8 @@ void mousedragpassive(int x, int y)
     else if(CURRENT_PLACE == idApartmentFull)
     {
         // FIXME: need some way to know *which* hotspot was highlighted
-        // FIXME: Need to implement hotspots for apartment
-        //ApartmentFull.CheckHotspotsHovered(x, y);
+        ApartmentFull.CheckHotspotsHovered(x, y);
 
-        HOVER_FLAG = 0;
         if(HOVER_FLAG)
         {
             glutSetCursor(GLUT_CURSOR_INFO);

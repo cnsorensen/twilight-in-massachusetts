@@ -35,7 +35,12 @@ void InitGame(void)
     // Load characters
 
     // Load hotspots
-    Downtown.AddHotspot(65, 215, 175, 65);
+    // FIXME: add id numbers for each hotspot?
+    Downtown.AddHotspot(65, 215, 175, 65); //apt entrance
+
+    // FIXME: adding more than one hotspot is not working
+    ApartmentFull.AddHotspot(480, 300, 715, 65); // bed
+    ApartmentFull.AddHotspot(230, 435, 465, 230); // window
 
     // Load objects
 

@@ -104,6 +104,8 @@ int Place :: AddHotspot(int x1, int y1, int x2, int y2)
 
     m_hotspots.push_back(t_hs);
 
+    //fprintf(stderr, "Hotspot list holds %d hotspots\n", int(m_hotspots.size()));
+
     return 1;
 }
 
@@ -133,6 +135,7 @@ void Place :: CheckHotspotsHovered(int x, int y)
         if(it->CheckHovered(x, y))
         {
             HOVER_FLAG = 1;
+            break;
         }
         else
         {
