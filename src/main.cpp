@@ -19,7 +19,6 @@ Loads all backgrounds, characters, objects, and etc...
 void InitGame(void)
 {
     // initialize values
-    currentPlace = idNowhere;
 
     // Load all backgrounds
     Downtown.LoadBackground(DAYTIME);
@@ -38,7 +37,7 @@ void InitGame(void)
     // Load hotspots
     Downtown.AddHotspot(65, 215, 175, 65);
 
-		// Load objects
+    // Load objects
 
     return;
 }
@@ -92,7 +91,7 @@ void InitOpenGL(void)
 int main(int argc, char* argv[])
 {
     // FIXME: load game if given a game file
-    
+
     // initialize game
     InitGame();
 

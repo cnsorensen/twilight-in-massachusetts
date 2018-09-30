@@ -23,10 +23,10 @@ public: // functions
     void Run();
     void LoadGame(const char*);
     void SaveGame(void);
- 
+
 public: // variables
     // should I include arrays of people and places?
-    // i need something to hold plot line and dialogs??    
+    // i need something to hold plot line and dialogs??
 
 private:
     const char* m_title;

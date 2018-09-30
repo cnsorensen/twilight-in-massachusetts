@@ -33,7 +33,10 @@ extern const idPlace idWitchesBrew;
 extern const idPlace idApartmentFull;
 extern const idPlace idApartmentSarah;
 extern const idPlace idSalemU;
-extern idPlace currentPlace;
+
+extern idPlace CURRENT_PLACE;
+extern int CURRENT_TIME;
+extern int TEMP_COUNT;
 
 // number of places
 extern const int PLACES_COUNT;

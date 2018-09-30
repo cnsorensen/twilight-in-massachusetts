@@ -11,7 +11,7 @@ extern Person StevieN;
 
 // massachusetts characters
 extern Person SarahG;
-extern Person BenA; 
+extern Person BenA;
 extern Person ElizabethP;
 extern Person MilesC;
 

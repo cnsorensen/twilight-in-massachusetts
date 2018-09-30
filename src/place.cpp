@@ -1,6 +1,6 @@
 // place.cpp
 
-#include "place.h" 
+#include "place.h"
 #include <GL/freeglut.h>
 
 Place :: Place()
@@ -14,7 +14,7 @@ Place :: Place()
 {
 }
 
-Place :: Place(const char* name, const char* dayBGroundFile, 
+Place :: Place(const char* name, const char* dayBGroundFile,
                const char* nightBGroundFile, unsigned char* imagePtrDay,
                unsigned char* imagePtrNight, idPlace placeId, std::vector<Hotspot> hotspots)
 : m_name(name)
@@ -78,6 +78,11 @@ const char* Place :: GetBGroundFile(int time)
     }
 }
 
+unsigned char* Place :: GetImagePtrDay(void)
+{
+    return m_imagePtrDay;
+}
+
 // adds an existing hotspot to the list
 int Place :: AddHotspot(Hotspot h)
 {
@@ -85,8 +90,8 @@ int Place :: AddHotspot(Hotspot h)
     it = m_hotspots.begin();
 
     m_hotspots.push_back(h);
- 
-	return 1;
+
+    return 1;
 }
 
 // creates new hotspot before adding to the list of hotspots
@@ -98,7 +103,7 @@ int Place :: AddHotspot(int x1, int y1, int x2, int y2)
     it = m_hotspots.begin();
 
     m_hotspots.push_back(t_hs);
- 
+
     return 1;
 }
 
@@ -110,14 +115,15 @@ int Place :: RemoveHotspot(Hotspot h)
 void Place :: GoToLocation(int time)
 {
     DrawBackground(time);
-    currentPlace = m_placeId;
+    CURRENT_PLACE = m_placeId;
+    CURRENT_TIME = time;
 
     return;
 }
 
 void Place :: CheckHotspotsHovered(int x, int y)
 {
-	// hotspots iterator
+    // hotspots iterator
     std::vector<Hotspot>::iterator it;
 
     // check to see if cursor is hovered over a hotspot
@@ -178,19 +184,19 @@ int Place :: LoadBackground(int time)
 
     // If starts with "BM" for "BitMap"
     if(bChar == 'B' && mChar == 'M')
-    {			
+    {
         // Skip 4 fields we don't care about
-        SkipChars(infile, 4 + 2 + 2 + 4 + 4);			
-        
+        SkipChars(infile, 4 + 2 + 2 + 4 + 4);
+
         NumCols = ReadLong(infile);
         NumRows = ReadLong(infile);
 
         // Skip one field
-        SkipChars(infile, 2);					
+        SkipChars(infile, 2);
         int bitsPerPixel = ReadShort(infile);
         // Skip 6 more fields
-        SkipChars(infile, 4 + 4 + 4 + 4 + 4 + 4);		
-        
+        SkipChars(infile, 4 + 4 + 4 + 4 + 4 + 4);
+
         if(NumCols > 0 && NumCols <= 100000 &&
            NumRows > 0 && NumRows <= 100000 &&
            bitsPerPixel == 24 && !feof(infile))
@@ -230,12 +236,12 @@ int Place :: LoadBackground(int time)
                 cPtr += 3;
             }
 
- 		    // Num bytes already read
+            // Num bytes already read
             int numBytes = GetNumBytesPerRow(NumCols);
             int k = 3 * NumCols;
             for(; k < numBytes; k++)
             {
-			    // Read and ignore padding;
+                // Read and ignore padding;
                 fgetc(infile);
                 *(cPtr++) = 0;
             }
@@ -274,12 +280,12 @@ int Place :: LoadBackground(int time)
                 cPtr += 3;
             }
 
- 		    // Num bytes already read
+            // Num bytes already read
             int numBytes = GetNumBytesPerRow(NumCols);
             int k = 3 * NumCols;
             for(; k < numBytes; k++)
             {
-			    // Read and ignore padding;
+                // Read and ignore padding
                 fgetc(infile);
                 *(cPtr++) = 0;
             }
@@ -333,7 +339,7 @@ int Place :: GetNumBytesPerRow(int NumCols)
 int Place :: ReadLong(FILE* infile)
 {
     unsigned char byte0, byte1, byte2, byte3;
-    
+
     // Read bytes, low order to high order
     byte0 = fgetc(infile);
     byte1 = fgetc(infile);
@@ -356,16 +362,16 @@ int Place :: ReadLong(FILE* infile)
 short Place :: ReadShort(FILE* infile)
 {
     unsigned char lowByte, hiByte;
-	
+
     // Read the low order byte (little endian form)
     lowByte = fgetc(infile);
-    // Read the high order byte   
+    // Read the high order byte
     hiByte = fgetc(infile);
 
     // Pack together
     short ret = hiByte;
     ret <<= 8;
     ret |= lowByte;
-    
+
     return ret;
 }

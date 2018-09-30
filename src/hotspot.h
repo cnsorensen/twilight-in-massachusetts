@@ -6,7 +6,7 @@
 class Hotspot
 {
 public:
-    
+
     Hotspot();
     Hotspot(int, int, int, int);
     Hotspot(int[4]);

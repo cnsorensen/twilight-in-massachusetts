@@ -27,15 +27,19 @@ const int NIGHTTIME = 1;
 
 int SELECT_FLAG = 0;
 int HOVER_FLAG = 0; // if the cursor is hovered over a hotspot
+int TEMP_COUNT = 0;
 
-// id's for places, used to check current location 
+// id's for places, used to check current location
 const idPlace idNowhere = -1;
-const idPlace idDowntown = 0;
-const idPlace idWitchesBrew = 1;
+const idPlace idDowntown = 1;
+const idPlace idWitchesBrew = 0;
 const idPlace idApartmentFull = 2;
 const idPlace idApartmentSarah = 3;
 const idPlace idSalemU = 4;
-idPlace currentPlace;
+
+// current globals
+idPlace CURRENT_PLACE = idDowntown;//idNowhere;
+int CURRENT_TIME = DAYTIME;
 
 // number of places
 const int PLACES_COUNT = 6;

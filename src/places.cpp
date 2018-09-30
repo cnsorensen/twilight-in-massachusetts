@@ -6,7 +6,7 @@ Place Downtown("Downtown",
 "/home/cnsorensen/projects/twilight-in-massachusetts/src/images/backgrounds/downtown-day.bmp",
 "/home/cnsorensen/projects/twilight-in-massachusetts/src/images/backgrounds/downtown-night.bmp",
 NULL, NULL, idDowntown, std::vector<Hotspot>());
-Place WitchesBrew("Witches Brew", 
+Place WitchesBrew("Witches Brew",
 "/home/cnsorensen/projects/twilight-in-massachusetts/src/images/backgrounds/witchsbrew-day.bmp",
 "/home/cnsorensen/projects/twilight-in-massachusetts/src/images/backgrounds/witchsbrew-night.bmp",
 NULL, NULL, idWitchesBrew, std::vector<Hotspot>());

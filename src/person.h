@@ -22,7 +22,7 @@ public:
     int SetHello(const char*);
     const char* GetHello(void);
     int SetGoodbye(const char*);
-    const char* GetGoodbye(void); 
+    const char* GetGoodbye(void);
 
     // functions
     //int Speak(const char*, int, int, int);
@@ -30,14 +30,14 @@ public:
 private:
     const char* m_fName;
     const char* m_lName;
-    //TextColor m_textColor; 
+    //TextColor m_textColor;
     int m_age;
     const char* m_hello;
     const char* m_goodbye;
     // should we have some flag
     // for if they are at the
     // current place
-    // or a separate one for 
+    // or a separate one for
     // strictly phone call peeps?
 };
 

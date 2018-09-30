@@ -108,7 +108,7 @@ int Person :: Speak(const char* dialog, int name_f, int type_f, int reply_num)
 
     fprintf(stdout, "\n");
 
-    // decides wheter to put 'Name: ' in front of the dialog 
+    // decides wheter to put 'Name: ' in front of the dialog
     if(name_f == 1)
     {
         fprintf(stdout, "%s%s: ", m_textColor, m_fName);
@@ -118,7 +118,7 @@ int Person :: Speak(const char* dialog, int name_f, int type_f, int reply_num)
         fprintf(stdout, "%s", m_textColor);
 
     }
-     
+
     // print dialog
     if(type_f == 0)
     {
@@ -142,7 +142,7 @@ int Person :: Speak(const char* dialog, int name_f, int type_f, int reply_num)
         }
         fprintf(stdout, "\n");
     }
- 
+
     return 1;
 }
 */

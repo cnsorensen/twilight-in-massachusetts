@@ -24,6 +24,7 @@ public:
     const char* GetName(void);
     int SetBGroundFile(const char*, int);
     const char* GetBGroundFile(int);
+    unsigned char* GetImagePtrDay(void);
 
     int AddHotspot(Hotspot);
     int AddHotspot(int, int, int, int);

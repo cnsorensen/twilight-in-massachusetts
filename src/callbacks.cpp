@@ -22,8 +22,31 @@ void display(void)
 
     // draw background based on current location
     // FIXME: add some sort of switch here
-    //Downtown.DrawBackground();
-    Downtown.GoToLocation(DAYTIME);
+    //Downtown.DrawBackground(NIGHTTIME);
+    if(TEMP_COUNT == 0)
+    {
+        printf("%d - %d\n", CURRENT_PLACE, idDowntown);
+        TEMP_COUNT = 1;
+    }
+
+    //if(CURRENT_PLACE = idDowntown)
+    if(1)
+    {
+        //printf("I am currently Downtown\n");
+        //Downtown.GoToLocation(CURRENT_TIME);
+        Downtown.DrawBackground(CURRENT_TIME);
+        //TEMP_COUNT = 0;
+        //glutPostRedisplay();
+    }
+    //else if(CURRENT_PLACE == idApartmentFull)
+    if(0)
+    {
+        //printf("I amd currently at the apartment\n");
+        //ApartmentFull.GoToLocation(CURRENT_TIME);
+        ApartmentFull.DrawBackground(CURRENT_TIME);
+        //TEMP_COUNT = 0;
+        //glutPostRedisplay();
+    }
 
     // should do an implicit glFlush()
     glutSwapBuffers();
@@ -59,13 +82,13 @@ void reshape(int w, int h)
     // Make OpenGL coordinates
     gluOrtho2D(0.0, w, 0.0, h);
     // the same as the screen coordinates
-    glViewport(0, 0, w, h);   
+    glViewport(0, 0, w, h);
 }
 
 /**********************************************************************
                             keyboard
 **********************************************************************
-keyboard begins by compensating for the reverse y coordinate system 
+keyboard begins by compensating for the reverse y coordinate system
 within openGL. It then determines which key on the keyboard was pressed
 by the user.
 
@@ -97,16 +120,16 @@ void keyboard(unsigned char key, int x, int y)
 /**********************************************************************
                             mouseclick
 **********************************************************************
-mouseclick begins by compensating for the reverse y coordinate 
+mouseclick begins by compensating for the reverse y coordinate
 system within openGL. It then determines whether the left or right
-mouse button was pressed by the user. Next it determines the state of 
+mouse button was pressed by the user. Next it determines the state of
 the button, whether it has been pressed down or release.
 
 If the left button is pressed down, it evaluates the location of the
 press...
 
 If the right button is pressed down it evaluates the location of the
-press 
+press
 
 parameters:     button - the value of the button that was clicked
                 state - the state of the button
@@ -114,7 +137,7 @@ parameters:     button - the value of the button that was clicked
                 y - the y value of the selected coordinate
 **********************************************************************/
 void mouseclick(int button, int state, int x, int y)
-{   
+{
     // FIXME: placeholder for empty switch cases
     int greeneggs;
 
@@ -131,12 +154,43 @@ void mouseclick(int button, int state, int x, int y)
                 // FIXME: this is for debugging right now
                 printf("x:%d, y:%d\n", x, y);
 
-								// FIXME: do some sort of event here
+                // FIXME: do some sort of event here
                 if(HOVER_FLAG == 1)
                 {
-                    printf("DO SOMETHING!!\n");
+                    printf("Flag is hovered\n");
+                    if(CURRENT_PLACE == idDowntown)
+                    {
+                        printf("I am going to the apartment\n");
+                        // FIXME: need to figure out WHICH hotspot is selected (doing this for now)
+                        // go to the apartment
+                        //ApartmentFull.GoToLocation(DAYTIME);
+                        glDrawPixels(SCREENWIDTH, SCREENHEIGHT, GL_RGB,
+                                     GL_UNSIGNED_BYTE, ApartmentFull.GetImagePtrDay());
+                        CURRENT_PLACE = idApartmentFull;
+                        greeneggs = 2;
+                    }
+                    else if(CURRENT_PLACE == idWitchesBrew)
+                    {
+                        greeneggs = 2;
+                    }
+                    else if(CURRENT_PLACE == idApartmentFull)
+                    {
+                        greeneggs = 2;
+                    }
+                    else if(CURRENT_PLACE == idApartmentSarah)
+                    {
+                        greeneggs = 2;
+                    }
+                    else if(CURRENT_PLACE == idSalemU)
+                    {
+                        greeneggs = 2;
+                    }
+                    else
+                    {
+                        greeneggs = 2;
+                    }
                 }
-                else
+                else // no hover
                 {
                     greeneggs = 2;
                 }
@@ -163,7 +217,7 @@ void mouseclick(int button, int state, int x, int y)
         default:
             break;
     }
-    
+
     //refresh the display
     glutPostRedisplay();
 }
@@ -178,9 +232,10 @@ void mousedragpassive(int x, int y)
     y = SCREENHEIGHT - y;
 
     // search for hotspots
-		// change cursor icon based on where the cursor is currently located
-    if(currentPlace == idDowntown)
+    // change cursor icon based on where the cursor is currently located
+    if(CURRENT_PLACE == idDowntown)
     {
+        // FIXME: need some way to know *which* hotspot was highlighted
         Downtown.CheckHotspotsHovered(x, y);
         if(HOVER_FLAG)
         {
@@ -189,24 +244,24 @@ void mousedragpassive(int x, int y)
         else
         {
             glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
-        }        
+        }
     }
-    else if(currentPlace == idWitchesBrew)
+    else if(CURRENT_PLACE == idWitchesBrew)
     {
-        greeneggs = 2;        
+        greeneggs = 2;
     }
-    else if(currentPlace == idApartmentFull)
+    else if(CURRENT_PLACE == idApartmentFull)
     {
-        greeneggs = 2;        
+        greeneggs = 2;
     }
-    else if(currentPlace == idApartmentSarah)
+    else if(CURRENT_PLACE == idApartmentSarah)
     {
-        greeneggs = 2;        
+        greeneggs = 2;
     }
-    else if(currentPlace == idSalemU)
+    else if(CURRENT_PLACE == idSalemU)
     {
-        greeneggs = 2;        
-    }    
+        greeneggs = 2;
+    }
     else
     {
         greeneggs = 2;
@@ -221,7 +276,7 @@ void mousedrag(int x, int y)
 {
     // correct the y coordinate
     y = SCREENHEIGHT - y;
-    
+
     // refresh display
     glutPostRedisplay();
 }
