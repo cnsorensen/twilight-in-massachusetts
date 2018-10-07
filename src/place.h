@@ -27,7 +27,7 @@ public:
     unsigned char* GetImagePtrDay(void);
 
     int AddHotspot(Hotspot);
-    int AddHotspot(int, int, int, int);
+    int AddHotspot(int, int, int, int, idHotspot);
     int RemoveHotspot(Hotspot);
 
     int LoadBackground(int);
@@ -35,7 +35,7 @@ public:
 
     void GoToLocation(int);
 
-    void CheckHotspotsHovered(int x, int y);
+    idHotspot CheckHotspotsHovered(int x, int y);
 
 private:
     const char* m_name;

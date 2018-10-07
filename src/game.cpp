@@ -83,7 +83,7 @@ void Game :: LoadGame(const char* fileName)
 
     // get sat points
     fscanf(gameFile, "%d", &val);
-    SARAHG_SAT = val;
+    satSarahG = val;
 
     // debugging
     fprintf(stdout, "%d\n", val);
@@ -119,7 +119,7 @@ void Game :: SaveGame(void)
     }
 
     // put sat points
-    SARAHG_SAT = val;
+    satSarahG = val;
     fprintf(gameFile, "%d\n", val);
 
     // debugging

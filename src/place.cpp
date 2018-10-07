@@ -95,9 +95,9 @@ int Place :: AddHotspot(Hotspot h)
 }
 
 // creates new hotspot before adding to the list of hotspots
-int Place :: AddHotspot(int x1, int y1, int x2, int y2)
+int Place :: AddHotspot(int x1, int y1, int x2, int y2, idHotspot id)
 {
-    Hotspot t_hs(x1, y1, x2, y2);
+    Hotspot t_hs(x1, y1, x2, y2, id);
 
     std::vector<Hotspot>::iterator it;
     it = m_hotspots.begin();
@@ -123,8 +123,10 @@ void Place :: GoToLocation(int time)
     return;
 }
 
-void Place :: CheckHotspotsHovered(int x, int y)
+idHotspot Place :: CheckHotspotsHovered(int x, int y)
 {
+    idHotspot t_id = -1;
+
     // hotspots iterator
     std::vector<Hotspot>::iterator it;
 
@@ -132,18 +134,21 @@ void Place :: CheckHotspotsHovered(int x, int y)
     // if so, set the flag for hover so the cursor symbol can change
     for(it = m_hotspots.begin(); it != m_hotspots.end(); it++)
     {
-        if(it->CheckHovered(x, y))
+        t_id = it->CheckHovered(x, y);
+        if(t_id > -1)
         {
             HOVER_FLAG = 1;
-            break;
+            CURRENT_HOTSPOT = t_id;
+            return t_id;
         }
         else
         {
             HOVER_FLAG = 0;
+            CURRENT_HOTSPOT = hsNone;
         }
     }
 
-    return;
+    return -1;
 }
 //Author: Sam Buss December 2001
 int Place :: LoadBackground(int time)

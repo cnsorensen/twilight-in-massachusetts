@@ -15,7 +15,7 @@ using namespace std;
 int PLOT_FLAGS[5] = {0};
 
 // satisfaction points for each character
-int SARAHG_SAT = 0;
+int satSarahG = 0;
 
 // OpenGL globals
 const int SCREENWIDTH = 720;
@@ -37,8 +37,23 @@ const idPlace idApartmentFull = 2;
 const idPlace idApartmentSarah = 3;
 const idPlace idSalemU = 4;
 
+// id's for hotspots
+const idHotspot hsNone = -1;
+const idHotspot hsBackUp = 0;
+const idHotspot hsLeave = 1;
+// downtown
+const idHotspot hsApartmentDoor = 11;
+const idHotspot hsWitchesBrew = 12;
+// apartment hotspots
+const idHotspot hsSarahBed = 21;
+const idHotspot hsWindow = 22;
+// apartment sarah hotspots
+const idHotspot hsLight = 31;
+// witches brew hotspots
+
 // current globals
 idPlace CURRENT_PLACE = idDowntown;//idNowhere;
+idHotspot CURRENT_HOTSPOT = hsNone;
 int CURRENT_TIME = DAYTIME;
 
 // number of places

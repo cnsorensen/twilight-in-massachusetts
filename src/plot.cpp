@@ -10,7 +10,7 @@
 
 // plot variables
 //int PLOT_FLAGS[5] = {0};
-//int SARAHG_SAT = 0;
+//int satSarahG = 0;
 
 Plot PLOTS[2] = {Plot0, Plot1};
 

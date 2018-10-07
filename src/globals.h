@@ -13,7 +13,7 @@ extern Plot PLOTS[2];
 //extern int PLOT_FLAGS[2];
 
 // satifaction points
-extern int SARAHG_SAT;
+extern int satSarahG;
 
 // OpenGL globals
 extern const int SCREENWIDTH;
@@ -34,8 +34,25 @@ extern const idPlace idApartmentFull;
 extern const idPlace idApartmentSarah;
 extern const idPlace idSalemU;
 
+// id's for hotspots
+typedef int idHotspot;
+extern const idHotspot hsNone;
+extern const idHotspot hsBackUp;
+extern const idHotspot hsLeave;
+// downtown hotspots
+extern const idHotspot hsApartmentDoor;
+extern const idHotspot hsWitchesBrew;
+// apartment hotspots
+extern const idHotspot hsSarahBed;
+extern const idHotspot hsWindow;
+// apartment sarah hotspots
+extern const idHotspot hsLight;
+// witches brew hotspots
+
+// current variables
 extern idPlace CURRENT_PLACE;
 extern int CURRENT_TIME;
+extern idHotspot CURRENT_HOTSPOT;
 extern int TEMP_COUNT;
 
 // number of places
