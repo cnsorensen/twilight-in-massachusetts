@@ -20,6 +20,8 @@ int satSarahG = 0;
 // OpenGL globals
 const int SCREENWIDTH = 720;
 const int SCREENHEIGHT = 480;
+//const int SCREENWIDTH = 1200;
+//const int SCREENHEIGHT = 900;
 
 // other globals
 const int DAYTIME = 0;

@@ -150,6 +150,7 @@ idHotspot Place :: CheckHotspotsHovered(int x, int y)
 
     return -1;
 }
+
 //Author: Sam Buss December 2001
 int Place :: LoadBackground(int time)
 {
@@ -323,7 +324,6 @@ int Place :: DrawBackground(int time)
     else // default to daytime
     {
         glDrawPixels(SCREENWIDTH, SCREENHEIGHT, GL_RGB, GL_UNSIGNED_BYTE, m_imagePtrDay);
-
     }
 
     return 1;

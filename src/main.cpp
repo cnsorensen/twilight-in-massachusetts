@@ -57,9 +57,15 @@ void InitOpenGL(void)
     glutInitDisplayMode(GLUT_RGBA | GLUT_SINGLE);
 
     // windowsize, position, and title
-    glutInitWindowSize(SCREENWIDTH, SCREENHEIGHT);
-    glutInitWindowPosition(100, 50);
+    //glutInitWindowSize(SCREENWIDTH, SCREENHEIGHT);
+    //glutInitWindowPosition(100, 50);
+   // glutInitWindowPosition(0, 0);
     glutCreateWindow("Twilight in Massachusetts");
+    
+    //glClearColor(0.0, 0.0, 1.0, 0.0);
+    //glClear(GL_COLOR_BUFFER_BIT);
+
+    glutFullScreen();
 
     // set cursor image
     if(SELECT_FLAG)

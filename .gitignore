@@ -4,3 +4,4 @@ cs-twilightinmass
 *.game
 examples/*
 examples
+*.txt
