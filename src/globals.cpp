@@ -18,8 +18,8 @@ int PLOT_FLAGS[5] = {0};
 int satSarahG = 0;
 
 // OpenGL globals
-const int SCREENWIDTH = 720;
-const int SCREENHEIGHT = 480;
+int SCREENWIDTH = -1;
+int SCREENHEIGHT = -1;
 //const int SCREENWIDTH = 1200;
 //const int SCREENHEIGHT = 900;
 
@@ -29,7 +29,11 @@ const int NIGHTTIME = 1;
 
 int SELECT_FLAG = 0;
 int HOVER_FLAG = 0; // if the cursor is hovered over a hotspot
+
+// FIXME: debugging flags
 int TEMP_COUNT = 0;
+int TEMP_COUNT2 = 0;
+int FULL_SIZE_FLAG = 0;
 
 // id's for places, used to check current location
 const idPlace idNowhere = -1;
@@ -60,3 +64,7 @@ int CURRENT_TIME = DAYTIME;
 
 // number of places
 const int PLACES_COUNT = 6;
+
+// colors
+const float Black[] = {0.0, 0.0, 0.0};
+const float DarkPurple[] = {0.2, 0.0, 0.2};

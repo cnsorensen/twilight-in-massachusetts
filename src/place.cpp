@@ -316,7 +316,10 @@ int Place :: LoadBackground(int time)
 
 int Place :: DrawBackground(int time)
 {
-    glRasterPos2i(0, 0);
+    float wPadding;
+    float hPadding;
+
+    /*glRasterPos2i(0, 0);
     if(time == NIGHTTIME)
     {
         glDrawPixels(SCREENWIDTH, SCREENHEIGHT, GL_RGB, GL_UNSIGNED_BYTE, m_imagePtrNight);
@@ -324,7 +327,27 @@ int Place :: DrawBackground(int time)
     else // default to daytime
     {
         glDrawPixels(SCREENWIDTH, SCREENHEIGHT, GL_RGB, GL_UNSIGNED_BYTE, m_imagePtrDay);
-    }
+    }*/
+
+    /*
+        [0, 950  ...  1280, 950]
+        [0, 0    ...  1280, 0  ]
+        
+    */
+
+    // calculate border sizes
+    wPadding = (SCREENWIDTH - 720) / 2;
+    hPadding = (SCREENHEIGHT - 480) / 2;
+
+    // draw background
+    // FIXME: black window for right now
+    glColor3fv(Black);
+    glBegin(GL_POLYGON);
+        glVertex2f(wPadding, SCREENHEIGHT - hPadding);
+        glVertex2f(wPadding, hPadding);
+        glVertex2f(SCREENWIDTH - wPadding, hPadding);
+        glVertex2f(SCREENWIDTH - wPadding, SCREENHEIGHT - hPadding);
+    glEnd();
 
     return 1;
 }

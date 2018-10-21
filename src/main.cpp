@@ -13,9 +13,7 @@
 #include <string.h>
 #include <GL/freeglut.h>
 
-/*
-Loads all backgrounds, characters, objects, and etc...
-*/
+// Loads all backgrounds, characters, objects, and etc...
 void InitGame(void)
 {
     // initialize values
@@ -55,35 +53,31 @@ void InitOpenGL(void)
 {
     // 32-bit graphics and single buffering
     glutInitDisplayMode(GLUT_RGBA | GLUT_SINGLE);
+    // 32-bit graphs and double buffering
+    //glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 
     // windowsize, position, and title
     //glutInitWindowSize(SCREENWIDTH, SCREENHEIGHT);
     //glutInitWindowPosition(100, 50);
    // glutInitWindowPosition(0, 0);
     glutCreateWindow("Twilight in Massachusetts");
-    
-    //glClearColor(0.0, 0.0, 1.0, 0.0);
-    //glClear(GL_COLOR_BUFFER_BIT);
 
     glutFullScreen();
 
-    // set cursor image
-    if(SELECT_FLAG)
-    {
-        glutSetCursor(GLUT_CURSOR_INFO);
-    }
-    else
-    {
-        glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
-    }
+    // Indicates buffers currently enabled for color writing
+    // FIXME: do I put this here? or just in display?
+    //glClear(GL_COLOR_BUFFER_BIT);
 
     // black background
-    glClearColor(0.0, 0.0, 0.0, 0.0);
+    //glClearColor(0.0, 0.0, 0.0, 0.0);
+    // darpurple
+    glClearColor(0.2, 0.0, 0.2, 0.0);
 
-    // aint no callaback routines
     //redisplay window
     glutDisplayFunc(display);
-    //glutIdleFunc(display); // do i need this?
+
+    // FIXME: I may need this...
+    //glutIdleFunc(display);
 
     // resize
     glutReshapeFunc(reshape);
@@ -94,15 +88,14 @@ void InitOpenGL(void)
     // mouse events
     glutMouseFunc(mouseclick);
 
-    //mouse movement
+    // mouse movement
     glutPassiveMotionFunc(mousedragpassive);
 
-    //mouse pressed movement
+    // mouse pressed movement
     glutMotionFunc(mousedrag);
 
     return;
 }
-
 
 int main(int argc, char* argv[])
 {

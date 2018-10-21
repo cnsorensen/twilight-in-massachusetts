@@ -16,8 +16,8 @@ extern Plot PLOTS[2];
 extern int satSarahG;
 
 // OpenGL globals
-extern const int SCREENWIDTH;
-extern const int SCREENHEIGHT;
+extern int SCREENWIDTH;
+extern int SCREENHEIGHT;
 
 // other globals
 extern const int DAYTIME;
@@ -53,9 +53,17 @@ extern const idHotspot hsLight;
 extern idPlace CURRENT_PLACE;
 extern int CURRENT_TIME;
 extern idHotspot CURRENT_HOTSPOT;
+
+// FIXME: debugging flags
 extern int TEMP_COUNT;
+extern int TEMP_COUNT2;
+extern int FULL_SIZE_FLAG;
 
 // number of places
 extern const int PLACES_COUNT;
+
+// colors
+extern const float Black[];
+extern const float DarkPurple[];
 
 #endif //__GLOBALS_H__

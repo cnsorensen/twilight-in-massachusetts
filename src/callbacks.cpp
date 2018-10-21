@@ -20,24 +20,27 @@ void display(void)
 {
     // background color
     // FIXME: Does this go here?
-    glClearColor(0.2, 0.0, 0.2, 0.0);
+    //glClearColor(0.2, 0.0, 0.2, 0.0);
 
     // clear the display
+    // Indicates buffers currently enable for color writing
     glClear(GL_COLOR_BUFFER_BIT);
+
+    SCREENWIDTH = glutGet(GLUT_WINDOW_WIDTH);
+    SCREENHEIGHT = glutGet(GLUT_WINDOW_HEIGHT);
 
     //FIXME: debugging
     // Full screen is Width: 1920, Height: 950
-	// Takes a second to get to that size
-    if(TEMP_COUNT == 0)
+    // FIXME: Takes 3 iterations to get to full size. This could potentially be a problem
+    /*if(TEMP_COUNT < 3)
     {
         printf("Current: %d - Downtown: %d\n", CURRENT_PLACE, idDowntown);
-        printf("Width %d, Height %d\n", glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
+        printf("glutGet Width %d, Height %d\n", glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
+        printf("globals Width %d, Height %d\n", SCREENWIDTH, SCREENHEIGHT);
         TEMP_COUNT++;
-    }
+    }*/
 
     // draw background based on current location
-    // Maybe draw background based on size from the center? 
-    /*
     if(CURRENT_PLACE == idDowntown)
     {
         Downtown.GoToLocation(CURRENT_TIME);
@@ -52,7 +55,6 @@ void display(void)
     {
         ApartmentSarah.GoToLocation(CURRENT_TIME);
     }
-    */
 
     // should do an implicit glFlush()
     // FIXME: what do you mean my implicit?
@@ -81,7 +83,6 @@ parameters:     w - the desired window width
 **********************************************************************/
 void reshape(int w, int h)
 {
-    // nice try, bucko. No reshaping window.
     // FIXME: i need full screen and i need it now 867-cash-now
     //glutReshapeWindow(SCREENWIDTH, SCREENHEIGHT);
 
@@ -112,7 +113,7 @@ parameters:     key - the character value of the key pressed
 void keyboard(unsigned char key, int x, int y)
 {
     //correct for upside-down screen coordinates
-    //y = SCREENHEIGHT - y;
+    y = SCREENHEIGHT - y;
 
     switch(key)
     {
@@ -153,7 +154,7 @@ void mouseclick(int button, int state, int x, int y)
     int greeneggs;
 
     //correct for upside-down screen coordinates
-    //y = SCREENHEIGHT - y;
+    y = SCREENHEIGHT - y;
 
     // handle mouse click events
     switch(button)
@@ -267,7 +268,7 @@ void mousedragpassive(int x, int y)
     int greeneggs;
 
     // correct the y coordinate
-    //y = SCREENHEIGHT - y;
+    y = SCREENHEIGHT - y;
 
     // search for hotspots
     // change cursor icon based on where the cursor is currently located
@@ -333,7 +334,7 @@ void mousedragpassive(int x, int y)
 void mousedrag(int x, int y)
 {
     // correct the y coordinate
-    //y = SCREENHEIGHT - y;
+    y = SCREENHEIGHT - y;
 
     // refresh display
     glutPostRedisplay();
