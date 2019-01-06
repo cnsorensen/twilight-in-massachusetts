@@ -18,46 +18,100 @@ display provides OpenGL
 **********************************************************************/
 void display(void)
 {
-    // background color
+    float wPadding;
+    float hPadding;
+
+	// get fullscreen sizes
+    SCREENWIDTH = glutGet(GLUT_WINDOW_WIDTH);
+    SCREENHEIGHT = glutGet(GLUT_WINDOW_HEIGHT);
+
+    // FIXME: debugging
+    // Full screen is Width: 1920, Height: 950
+    // FIXME: Takes 3 iterations to get to full size. This could potentially be a problem
+    /* if(TEMP_COUNT < 3)
+    {
+        //printf("Current: %d - Downtown: %d\n", CURRENT_PLACE, idDowntown);
+        printf("glutGet Width %d, Height %d\n", glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
+        printf("globals Width %d, Height %d\n", SCREENWIDTH, SCREENHEIGHT);
+        TEMP_COUNT++;
+    } */
+
+	// calculate border padding
+	wPadding = (SCREENWIDTH - 720) / 2;
+    hPadding = (SCREENHEIGHT - 480) / 2;
+
+    // background color - dark purple
     // FIXME: Does this go here?
-    //glClearColor(0.2, 0.0, 0.2, 0.0);
+    glClearColor(0.2, 0.0, 0.2, 0.0);
 
     // clear the display
     // Indicates buffers currently enable for color writing
     glClear(GL_COLOR_BUFFER_BIT);
 
-    SCREENWIDTH = glutGet(GLUT_WINDOW_WIDTH);
-    SCREENHEIGHT = glutGet(GLUT_WINDOW_HEIGHT);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+	glOrtho(0.0f, SCREENWIDTH, SCREENHEIGHT, 0.0, 0.0, 1.f);
 
-    //FIXME: debugging
-    // Full screen is Width: 1920, Height: 950
-    // FIXME: Takes 3 iterations to get to full size. This could potentially be a problem
-    /*if(TEMP_COUNT < 3)
-    {
-        printf("Current: %d - Downtown: %d\n", CURRENT_PLACE, idDowntown);
-        printf("glutGet Width %d, Height %d\n", glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
-        printf("globals Width %d, Height %d\n", SCREENWIDTH, SCREENHEIGHT);
-        TEMP_COUNT++;
-    }*/
+    GLuint texID;
+    glGenTextures(1, &texID);
+	glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texID);
 
-    // draw background based on current location
+    // draw window background based on current location
+	// FIXME: make a better way of doing this so it's not all if statements
     if(CURRENT_PLACE == idDowntown)
     {
-        Downtown.GoToLocation(CURRENT_TIME);
-        // FIXME: do I do the redisplay for all of them?
-        //glutPostRedisplay();
+		if(CURRENT_TIME == DAYTIME)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 720, 480, 0, GL_RGB, GL_UNSIGNED_BYTE,
+                         Downtown.GetImagePtrDay());
+		}
+		else
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 720, 480, 0, GL_RGB, GL_UNSIGNED_BYTE,
+                         Downtown.GetImagePtrNight());
+		}
     }
     else if(CURRENT_PLACE == idApartmentFull)
     {
-        ApartmentFull.GoToLocation(CURRENT_TIME);
+		if(CURRENT_TIME == DAYTIME)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 720, 480, 0, GL_RGB, GL_UNSIGNED_BYTE,
+                         ApartmentFull.GetImagePtrDay());
+		}
+		else
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 720, 480, 0, GL_RGB, GL_UNSIGNED_BYTE,
+                         ApartmentFull.GetImagePtrNight());
+		}
     }
     else if(CURRENT_PLACE == idApartmentSarah)
     {
-        ApartmentSarah.GoToLocation(CURRENT_TIME);
+		if(CURRENT_TIME == DAYTIME)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 720, 480, 0, GL_RGB, GL_UNSIGNED_BYTE,
+                         ApartmentSarah.GetImagePtrDay());
+		}
+		else
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 720, 480, 0, GL_RGB, GL_UNSIGNED_BYTE,
+                         ApartmentSarah.GetImagePtrNight());
+		}
     }
 
-    // should do an implicit glFlush()
-    // FIXME: what do you mean my implicit?
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+    glBegin(GL_QUADS);
+        glTexCoord2f(0.0, 0.0); glVertex2d(wPadding, SCREENHEIGHT - hPadding);
+        glTexCoord2f(0.0, 1.0); glVertex2d(wPadding, hPadding);
+        glTexCoord2f(1.0, 1.0); glVertex2d(SCREENWIDTH - wPadding, hPadding);
+        glTexCoord2f(1.0, 0.0); glVertex2d(SCREENWIDTH - wPadding, SCREENHEIGHT - hPadding);
+    glEnd();
+
+	glDisable(GL_TEXTURE_2D);
+
+    // FIXME: should do an implicit glFlush() here??
     //glutSwapBuffers(); // for double buffering
     glFlush(); // single buffering
 

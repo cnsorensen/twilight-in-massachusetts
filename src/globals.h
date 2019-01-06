@@ -63,7 +63,7 @@ extern int FULL_SIZE_FLAG;
 extern const int PLACES_COUNT;
 
 // colors
-extern const float Black[];
-extern const float DarkPurple[];
+extern const float cBlack[];
+extern const float cDarkPurple[];
 
 #endif //__GLOBALS_H__

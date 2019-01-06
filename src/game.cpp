@@ -49,9 +49,9 @@ void Game :: Run()
 
 void Game :: LoadGame(const char* fileName)
 {
-    //int i;
     int val;
     FILE* gameFile;
+    int scanCount;
 
     // open file
     gameFile = fopen(fileName, "r");
@@ -59,7 +59,8 @@ void Game :: LoadGame(const char* fileName)
     // check if file opened
     if(!gameFile)
     {
-        fprintf(stdout, "%s - Unable to open file %s", __PRETTY_FUNCTION__, fileName);
+        fprintf(stdout, "%s - Unable to open file %s", __PRETTY_FUNCTION__,
+                fileName);
         return;
     }
 
@@ -67,13 +68,19 @@ void Game :: LoadGame(const char* fileName)
     val = -1;
     for(int i = 0; i < 2; i++)
     {
-        fscanf(gameFile, "%d", &val);
+        scanCount = fscanf(gameFile, "%d", &val);
+
+        if(scanCount != 1)
+        {
+            fprintf(stdout, "%s - Unsuccessful scanf\n", __PRETTY_FUNCTION__);
+        }
 
         //PLOT_FLAGS[i] = val;
 
         if(feof(gameFile))
         {
-            fprintf(stdout, "%s - Invalid file %s", __PRETTY_FUNCTION__, fileName);
+            fprintf(stdout, "%s - Invalid file %s", __PRETTY_FUNCTION__,
+                    fileName);
             return;
         }
 
@@ -81,11 +88,16 @@ void Game :: LoadGame(const char* fileName)
         fprintf(stdout, "%d ", val);
     }
 
-    // get sat points
-    fscanf(gameFile, "%d", &val);
+    // get satisfaction points
+    scanCount = fscanf(gameFile, "%d", &val);
+    if(scanCount != 1)
+    {
+        fprintf(stdout, "%s - Unsuccessful scanf\n", __PRETTY_FUNCTION__);
+    }
+
     satSarahG = val;
 
-    // debugging
+    // FIXME: debugging
     fprintf(stdout, "%d\n", val);
 
     // close gamefile

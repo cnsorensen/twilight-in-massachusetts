@@ -83,6 +83,11 @@ unsigned char* Place :: GetImagePtrDay(void)
     return m_imagePtrDay;
 }
 
+unsigned char* Place :: GetImagePtrNight(void)
+{
+    return m_imagePtrNight;
+}
+
 // adds an existing hotspot to the list
 int Place :: AddHotspot(Hotspot h)
 {
@@ -104,7 +109,7 @@ int Place :: AddHotspot(int x1, int y1, int x2, int y2, idHotspot id)
 
     m_hotspots.push_back(t_hs);
 
-    //fprintf(stderr, "Hotspot list holds %d hotspots\n", int(m_hotspots.size()));
+    //fprintf(stdout, "Hotspot list holds %d hotspots\n", int(m_hotspots.size()));
 
     return 1;
 }
@@ -116,7 +121,6 @@ int Place :: RemoveHotspot(Hotspot h)
 
 void Place :: GoToLocation(int time)
 {
-    DrawBackground(time);
     CURRENT_PLACE = m_placeId;
     CURRENT_TIME = time;
 
@@ -179,11 +183,10 @@ int Place :: LoadBackground(int time)
     FILE* infile = fopen(filename, "rb");
     if(!infile)
     {
-        fprintf(stderr, "%s: unable to open file: %s\n", __PRETTY_FUNCTION__, filename);
+        fprintf(stdout, "%s: unable to open file: %s\n", __PRETTY_FUNCTION__, filename);
         exit(0);
     }
 
-    // FIXME: I don't wanna check for BM... ughhhh
     int fileFormatOK = 0;
     int bChar = fgetc(infile);
     int mChar = fgetc(infile);
@@ -217,7 +220,7 @@ int Place :: LoadBackground(int time)
     if(fileFormatOK == 0)
     {
         fclose(infile);
-        fprintf(stderr, "%s - Not a valid 24-bit bitmap file\n",
+        fprintf(stdout, "%s - Not a valid 24-bit bitmap file\n",
                 __PRETTY_FUNCTION__);
         exit(0);
     }
@@ -229,7 +232,8 @@ int Place :: LoadBackground(int time)
         if(!m_imagePtrNight)
         {
             fclose (infile);
-            fprintf(stderr, "%s: Unable to allocate memory for %s\n", __PRETTY_FUNCTION__, filename);
+            fprintf(stdout, "%s: Unable to allocate memory for %s\n",
+                    __PRETTY_FUNCTION__, filename);
             exit(0);
         }
 
@@ -259,7 +263,7 @@ int Place :: LoadBackground(int time)
         if(feof(infile))
         {
             fclose (infile);
-            fprintf(stderr, "%s: Premature end of file: %s.\n", __PRETTY_FUNCTION__, filename);
+            fprintf(stdout, "%s: Premature end of file: %s.\n", __PRETTY_FUNCTION__, filename);
             exit(0);
         }
 
@@ -273,7 +277,7 @@ int Place :: LoadBackground(int time)
         if(!m_imagePtrDay)
         {
             fclose (infile);
-            fprintf(stderr, "%s: Unable to allocate memory for %s\n", __PRETTY_FUNCTION__, filename);
+            fprintf(stdout, "%s: Unable to allocate memory for %s\n", __PRETTY_FUNCTION__, filename);
             exit(0);
         }
 
@@ -303,7 +307,7 @@ int Place :: LoadBackground(int time)
         if(feof(infile))
         {
             fclose (infile);
-            fprintf(stderr, "%s: Premature end of file: %s.\n", __PRETTY_FUNCTION__, filename);
+            fprintf(stdout, "%s: Premature end of file: %s.\n", __PRETTY_FUNCTION__, filename);
             exit(0);
         }
 
@@ -314,43 +318,6 @@ int Place :: LoadBackground(int time)
     return 1;
 }
 
-int Place :: DrawBackground(int time)
-{
-    float wPadding;
-    float hPadding;
-
-    /*glRasterPos2i(0, 0);
-    if(time == NIGHTTIME)
-    {
-        glDrawPixels(SCREENWIDTH, SCREENHEIGHT, GL_RGB, GL_UNSIGNED_BYTE, m_imagePtrNight);
-    }
-    else // default to daytime
-    {
-        glDrawPixels(SCREENWIDTH, SCREENHEIGHT, GL_RGB, GL_UNSIGNED_BYTE, m_imagePtrDay);
-    }*/
-
-    /*
-        [0, 950  ...  1280, 950]
-        [0, 0    ...  1280, 0  ]
-        
-    */
-
-    // calculate border sizes
-    wPadding = (SCREENWIDTH - 720) / 2;
-    hPadding = (SCREENHEIGHT - 480) / 2;
-
-    // draw background
-    // FIXME: black window for right now
-    glColor3fv(Black);
-    glBegin(GL_POLYGON);
-        glVertex2f(wPadding, SCREENHEIGHT - hPadding);
-        glVertex2f(wPadding, hPadding);
-        glVertex2f(SCREENWIDTH - wPadding, hPadding);
-        glVertex2f(SCREENWIDTH - wPadding, SCREENHEIGHT - hPadding);
-    glEnd();
-
-    return 1;
-}
 // Author: Dr. John Weiss, *THE* Weiss of the Weiss Distribution Method
 void Place :: SkipChars(FILE* infile, int numChars)
 {

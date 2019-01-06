@@ -25,16 +25,15 @@ public:
     int SetBGroundFile(const char*, int);
     const char* GetBGroundFile(int);
     unsigned char* GetImagePtrDay(void);
+    unsigned char* GetImagePtrNight(void);
 
     int AddHotspot(Hotspot);
     int AddHotspot(int, int, int, int, idHotspot);
     int RemoveHotspot(Hotspot);
 
     int LoadBackground(int);
-    int DrawBackground(int);
 
     void GoToLocation(int);
-
     idHotspot CheckHotspotsHovered(int x, int y);
 
 private:

@@ -23,7 +23,7 @@ int SCREENHEIGHT = -1;
 //const int SCREENWIDTH = 1200;
 //const int SCREENHEIGHT = 900;
 
-// other globals
+// other global constants
 const int DAYTIME = 0;
 const int NIGHTTIME = 1;
 
@@ -66,5 +66,5 @@ int CURRENT_TIME = DAYTIME;
 const int PLACES_COUNT = 6;
 
 // colors
-const float Black[] = {0.0, 0.0, 0.0};
-const float DarkPurple[] = {0.2, 0.0, 0.2};
+const float cBlack[] = {0.0, 0.0, 0.0};
+const float cDarkPurple[] = {0.2, 0.0, 0.2};
