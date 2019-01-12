@@ -15,6 +15,6 @@ void mousedragpassive(int x, int y);
 void mousedrag(int x, int y);
 
 // location
-extern Place CurrentLocation;
+extern Place* pCurrentLocation;
 
 #endif //__CALLBACKS_H__

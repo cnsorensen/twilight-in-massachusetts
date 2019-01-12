@@ -36,6 +36,7 @@ extern const idPlace idSalemU;
 
 extern const int iBackgroundWidth;
 extern const int iBackgroundHeight;
+extern float wPadding;
 
 // id's for hotspots
 typedef int idHotspot;

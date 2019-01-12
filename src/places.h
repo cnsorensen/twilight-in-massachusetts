@@ -12,4 +12,7 @@ extern Place ApartmentFull;
 extern Place ApartmentSarah;
 extern Place SalemU;
 
+extern int PlacesCount;
+extern Place Places[];
+
 #endif //__PLACES_H__

@@ -40,7 +40,6 @@ Place :: ~Place()
 }
 
 // setters and getters
-
 int Place :: SetName(const char* name)
 {
     m_name = name;
@@ -88,6 +87,23 @@ unsigned char* Place :: GetImagePtrNight(void)
     return m_imagePtrNight;
 }
 
+unsigned char* Place :: GetImagePtr(int time)
+{
+    if(time == DAYTIME)
+    {
+        return m_imagePtrDay;
+    }
+    else
+    {
+        return m_imagePtrNight;
+    }
+}
+
+idPlace Place :: GetPlaceId(void)
+{
+    return m_placeId;
+}
+
 // adds an existing hotspot to the list
 int Place :: AddHotspot(Hotspot h)
 {
@@ -119,6 +135,7 @@ int Place :: RemoveHotspot(Hotspot h)
     return -1;
 }
 
+// FIXME: I don't think this is needed anymore
 void Place :: GoToLocation(int time)
 {
     CURRENT_PLACE = m_placeId;
@@ -153,6 +170,22 @@ idHotspot Place :: CheckHotspotsHovered(int x, int y)
     }
 
     return -1;
+}
+
+void Place :: DeleteBackgrounds(void)
+{
+    if(m_imagePtrDay != NULL)
+    {
+        fprintf(stdout, "Deleting day pointer...\n");
+        delete m_imagePtrDay;
+    }
+    if(m_imagePtrNight != NULL)
+    {
+        fprintf(stdout, "Deleting night pointer...\n");
+        delete m_imagePtrNight;
+    }
+
+    return;
 }
 
 //Author: Sam Buss December 2001

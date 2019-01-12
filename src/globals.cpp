@@ -45,6 +45,7 @@ const idPlace idSalemU = 4;
 
 const int iBackgroundWidth = 1600;
 const int iBackgroundHeight = 950;
+float wPadding = 0.0;
 
 // id's for hotspots
 const idHotspot hsNone = -1;

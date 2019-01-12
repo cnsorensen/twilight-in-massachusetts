@@ -72,7 +72,7 @@ void InitOpenGL(void)
     // black background
     //glClearColor(0.0, 0.0, 0.0, 0.0);
     // dark purple background
-    //glClearColor(0.2, 0.0, 0.2, 0.0);
+    glClearColor(0.2, 0.0, 0.2, 0.0);
 
     //redisplay window
     glutDisplayFunc(display);

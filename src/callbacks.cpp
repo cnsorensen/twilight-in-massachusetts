@@ -8,7 +8,7 @@
 
 // locations
 // FIXME: should i put the other current globals here instead?
-Place CurrentLocation;
+Place* pCurrentLocation = &Downtown;
 
 // aint no callabacks gurl
 /**********************************************************************
@@ -19,24 +19,28 @@ display provides OpenGL
 void display(void)
 {
     // width padding for the background
-    float wPadding;
+    //float wPadding;
 
 	// FIXME: for debugging purposes
-    int window_w = glutGet(GLUT_WINDOW_WIDTH);
-    int window_h = glutGet(GLUT_WINDOW_HEIGHT);
-    int screen_w = glutGet(GLUT_SCREEN_WIDTH);
-    int screen_h = glutGet(GLUT_SCREEN_HEIGHT);
+    //int window_w = glutGet(GLUT_WINDOW_WIDTH);
+    //int window_h = glutGet(GLUT_WINDOW_HEIGHT);
+    //int screen_w = glutGet(GLUT_SCREEN_WIDTH);
+    //int screen_h = glutGet(GLUT_SCREEN_HEIGHT);
 
     // get screen size
-    SCREENWIDTH = glutGet(GLUT_SCREEN_WIDTH);
-    SCREENHEIGHT = glutGet(GLUT_SCREEN_HEIGHT);
+    if(TEMP_COUNT2 < 4)
+    { 
+        SCREENWIDTH = glutGet(GLUT_SCREEN_WIDTH);
+        SCREENHEIGHT = glutGet(GLUT_SCREEN_HEIGHT);
+        TEMP_COUNT2++;
+    }
 
     // calculate border padding
 	wPadding = (SCREENWIDTH - iBackgroundWidth) / 2;
 
     // background color - dark purple
     // FIXME: Does this go here?
-    glClearColor(0.2, 0.0, 0.2, 0.0);
+    //glClearColor(0.2, 0.0, 0.2, 0.0);
 
     // clear the display
     // Indicates buffers currently enable for color writing
@@ -51,50 +55,11 @@ void display(void)
 	glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texID);
 
-    // draw window background based on current location
-	// FIXME: make a better way of doing this so it's not all if statements
-    // FIXME: need variables for image dimensions
-    if(CURRENT_PLACE == idDowntown)
-    {
-		if(CURRENT_TIME == DAYTIME)
-		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight,
-                         0, GL_RGB, GL_UNSIGNED_BYTE, Downtown.GetImagePtrDay());
-		}
-		else
-		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight,
-                         0, GL_RGB, GL_UNSIGNED_BYTE, Downtown.GetImagePtrNight());
-		}
-    }
-    else if(CURRENT_PLACE == idApartmentFull)
-    {
-		if(CURRENT_TIME == DAYTIME)
-		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight,
-                         0, GL_RGB, GL_UNSIGNED_BYTE, ApartmentFull.GetImagePtrDay());
-		}
-		else
-		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight,
-                         0, GL_RGB, GL_UNSIGNED_BYTE, ApartmentFull.GetImagePtrNight());
-		}
-    }
-    else if(CURRENT_PLACE == idApartmentSarah)
-    {
-		if(CURRENT_TIME == DAYTIME)
-		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight,
-                         0, GL_RGB, GL_UNSIGNED_BYTE, ApartmentSarah.GetImagePtrDay());
-		}
-		else
-		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight,
-                         0, GL_RGB, GL_UNSIGNED_BYTE, ApartmentSarah.GetImagePtrNight());
-		}
-    }
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    // draw window background based on current location and time
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight,
+                 0, GL_RGB, GL_UNSIGNED_BYTE, pCurrentLocation->GetImagePtr(CURRENT_TIME));
+	
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
     // FIXME: everywhere else fixes upsidedown coordinates
@@ -170,6 +135,12 @@ void keyboard(unsigned char key, int x, int y)
         // Escape or 'q' quits program
         case 'q':
         case 27: //escape key
+            // delete everything
+            // FIXME: why 
+            for(int i = 0; i < PlacesCount; i++)
+            {
+                Places[i].DeleteBackgrounds();
+            } 
             exit(0);
             break;
         default:
@@ -225,6 +196,7 @@ void mouseclick(int button, int state, int x, int y)
                     {
                         if(CURRENT_HOTSPOT == hsApartmentDoor)
                         {
+                            pCurrentLocation = &ApartmentFull;
                             CURRENT_PLACE = idApartmentFull;
                         }
                         else if(CURRENT_HOTSPOT == hsWitchesBrew)
@@ -242,6 +214,7 @@ void mouseclick(int button, int state, int x, int y)
                     {
                         if(CURRENT_HOTSPOT == hsSarahBed)
                         {
+                            pCurrentLocation = &ApartmentSarah;
                             CURRENT_PLACE = idApartmentSarah;
                         }
                         else if(CURRENT_HOTSPOT == hsWindow)
@@ -257,6 +230,7 @@ void mouseclick(int button, int state, int x, int y)
                         }
                         else if(CURRENT_HOTSPOT == hsLeave)
                         {
+                            pCurrentLocation = &Downtown;
                             CURRENT_PLACE = idDowntown;
                         }
                     }
@@ -264,6 +238,7 @@ void mouseclick(int button, int state, int x, int y)
                     {
                         if(CURRENT_HOTSPOT == hsBackUp)
                         {
+                            pCurrentLocation = &ApartmentFull;
                             CURRENT_PLACE = idApartmentFull;
                         }
                         else if(CURRENT_HOTSPOT == hsLight)

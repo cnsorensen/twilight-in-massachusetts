@@ -23,3 +23,5 @@ Place SalemU("Salem University",
 "/home/cnsorensen/projects/twilight-in-massachusetts/src/images/backgrounds/salemu-night.bmp",
 NULL, NULL, idSalemU, std::vector<Hotspot>());
 
+int PlacesCount = 5;
+Place Places[5] = {Downtown, WitchesBrew, ApartmentFull, ApartmentSarah, SalemU};

@@ -26,11 +26,14 @@ public:
     const char* GetBGroundFile(int);
     unsigned char* GetImagePtrDay(void);
     unsigned char* GetImagePtrNight(void);
+    unsigned char* GetImagePtr(int);
+    idPlace GetPlaceId(void);
 
     int AddHotspot(Hotspot);
     int AddHotspot(int, int, int, int, idHotspot);
     int RemoveHotspot(Hotspot);
 
+    void DeleteBackgrounds(void);
     int LoadBackground(int);
 
     void GoToLocation(int);
