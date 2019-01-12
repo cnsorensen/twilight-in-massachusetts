@@ -18,27 +18,21 @@ display provides OpenGL
 **********************************************************************/
 void display(void)
 {
+    // width padding for the background
     float wPadding;
-    float hPadding;
 
-	// get fullscreen sizes
-    SCREENWIDTH = glutGet(GLUT_WINDOW_WIDTH);
-    SCREENHEIGHT = glutGet(GLUT_WINDOW_HEIGHT);
+	// FIXME: for debugging purposes
+    int window_w = glutGet(GLUT_WINDOW_WIDTH);
+    int window_h = glutGet(GLUT_WINDOW_HEIGHT);
+    int screen_w = glutGet(GLUT_SCREEN_WIDTH);
+    int screen_h = glutGet(GLUT_SCREEN_HEIGHT);
 
-    // FIXME: debugging
-    // Full screen is Width: 1920, Height: 950
-    // FIXME: Takes 3 iterations to get to full size. This could potentially be a problem
-    /* if(TEMP_COUNT < 3)
-    {
-        //printf("Current: %d - Downtown: %d\n", CURRENT_PLACE, idDowntown);
-        printf("glutGet Width %d, Height %d\n", glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
-        printf("globals Width %d, Height %d\n", SCREENWIDTH, SCREENHEIGHT);
-        TEMP_COUNT++;
-    } */
+    // get screen size
+    SCREENWIDTH = glutGet(GLUT_SCREEN_WIDTH);
+    SCREENHEIGHT = glutGet(GLUT_SCREEN_HEIGHT);
 
-	// calculate border padding
-	wPadding = (SCREENWIDTH - 720) / 2;
-    hPadding = (SCREENHEIGHT - 480) / 2;
+    // calculate border padding
+	wPadding = (SCREENWIDTH - iBackgroundWidth) / 2;
 
     // background color - dark purple
     // FIXME: Does this go here?
@@ -59,54 +53,56 @@ void display(void)
 
     // draw window background based on current location
 	// FIXME: make a better way of doing this so it's not all if statements
+    // FIXME: need variables for image dimensions
     if(CURRENT_PLACE == idDowntown)
     {
 		if(CURRENT_TIME == DAYTIME)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 720, 480, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                         Downtown.GetImagePtrDay());
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight,
+                         0, GL_RGB, GL_UNSIGNED_BYTE, Downtown.GetImagePtrDay());
 		}
 		else
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 720, 480, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                         Downtown.GetImagePtrNight());
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight,
+                         0, GL_RGB, GL_UNSIGNED_BYTE, Downtown.GetImagePtrNight());
 		}
     }
     else if(CURRENT_PLACE == idApartmentFull)
     {
 		if(CURRENT_TIME == DAYTIME)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 720, 480, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                         ApartmentFull.GetImagePtrDay());
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight,
+                         0, GL_RGB, GL_UNSIGNED_BYTE, ApartmentFull.GetImagePtrDay());
 		}
 		else
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 720, 480, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                         ApartmentFull.GetImagePtrNight());
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight,
+                         0, GL_RGB, GL_UNSIGNED_BYTE, ApartmentFull.GetImagePtrNight());
 		}
     }
     else if(CURRENT_PLACE == idApartmentSarah)
     {
 		if(CURRENT_TIME == DAYTIME)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 720, 480, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                         ApartmentSarah.GetImagePtrDay());
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight,
+                         0, GL_RGB, GL_UNSIGNED_BYTE, ApartmentSarah.GetImagePtrDay());
 		}
 		else
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 720, 480, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                         ApartmentSarah.GetImagePtrNight());
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight,
+                         0, GL_RGB, GL_UNSIGNED_BYTE, ApartmentSarah.GetImagePtrNight());
 		}
     }
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
+    // FIXME: everywhere else fixes upsidedown coordinates
     glBegin(GL_QUADS);
-        glTexCoord2f(0.0, 0.0); glVertex2d(wPadding, SCREENHEIGHT - hPadding);
-        glTexCoord2f(0.0, 1.0); glVertex2d(wPadding, hPadding);
-        glTexCoord2f(1.0, 1.0); glVertex2d(SCREENWIDTH - wPadding, hPadding);
-        glTexCoord2f(1.0, 0.0); glVertex2d(SCREENWIDTH - wPadding, SCREENHEIGHT - hPadding);
+        glTexCoord2f(0.0, 0.0); glVertex2d(wPadding, SCREENHEIGHT);
+        glTexCoord2f(0.0, 1.0); glVertex2d(wPadding, 0);
+        glTexCoord2f(1.0, 1.0); glVertex2d(SCREENWIDTH - wPadding, 0);
+        glTexCoord2f(1.0, 0.0); glVertex2d(SCREENWIDTH - wPadding, SCREENHEIGHT);
     glEnd();
 
 	glDisable(GL_TEXTURE_2D);

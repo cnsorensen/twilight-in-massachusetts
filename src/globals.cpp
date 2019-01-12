@@ -20,8 +20,8 @@ int satSarahG = 0;
 // OpenGL globals
 int SCREENWIDTH = -1;
 int SCREENHEIGHT = -1;
-//const int SCREENWIDTH = 1200;
-//const int SCREENHEIGHT = 900;
+//const int SCREENWIDTH = 1700;
+//const int SCREENHEIGHT = 800;
 
 // other global constants
 const int DAYTIME = 0;
@@ -43,19 +43,22 @@ const idPlace idApartmentFull = 2;
 const idPlace idApartmentSarah = 3;
 const idPlace idSalemU = 4;
 
+const int iBackgroundWidth = 1600;
+const int iBackgroundHeight = 950;
+
 // id's for hotspots
 const idHotspot hsNone = -1;
 const idHotspot hsBackUp = 0;
 const idHotspot hsLeave = 1;
-// downtown
+// downtown - 1x
 const idHotspot hsApartmentDoor = 11;
 const idHotspot hsWitchesBrew = 12;
-// apartment hotspots
+// apartment hotspots - 2x
 const idHotspot hsSarahBed = 21;
 const idHotspot hsWindow = 22;
-// apartment sarah hotspots
+// apartment sarah hotspots - 3x
 const idHotspot hsLight = 31;
-// witches brew hotspots
+// witches brew hotspots - 4x
 
 // current globals
 idPlace CURRENT_PLACE = idDowntown;//idNowhere;

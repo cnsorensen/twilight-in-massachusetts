@@ -34,6 +34,9 @@ extern const idPlace idApartmentFull;
 extern const idPlace idApartmentSarah;
 extern const idPlace idSalemU;
 
+extern const int iBackgroundWidth;
+extern const int iBackgroundHeight;
+
 // id's for hotspots
 typedef int idHotspot;
 extern const idHotspot hsNone;

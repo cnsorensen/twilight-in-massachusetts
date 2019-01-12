@@ -35,15 +35,15 @@ void InitGame(void)
 
     // Load hotspots
     // downtown
-    Downtown.AddHotspot(65, 215, 175, 65, hsApartmentDoor); //apt entrance
-    Downtown.AddHotspot(65, 215, 175, 65, hsWitchesBrew); //witches brew entrance
+    Downtown.AddHotspot(290, 460, 525, 145, hsApartmentDoor); //apt entrance
+    Downtown.AddHotspot(1000, 480, 1360, 80, hsWitchesBrew); //witches brew entrance
     // apartment full
-    ApartmentFull.AddHotspot(480, 300, 715, 65, hsSarahBed); // sarah's bed
-    ApartmentFull.AddHotspot(230, 435, 465, 230, hsWindow); // window
-    ApartmentFull.AddHotspot(155, 40, 570, 0, hsLeave); // leave apartment
+    ApartmentFull.AddHotspot(1310, 580, 1660, 150, hsSarahBed); // sarah's bed
+    ApartmentFull.AddHotspot(660, 860, 1155, 470, hsWindow); // window
+    ApartmentFull.AddHotspot(510, 45, 1390, 0, hsLeave); // leave apartment
     // apartment sarah
-    ApartmentSarah.AddHotspot(0, 75, 440, 0, hsBackUp); // back up to full apartment view
-    ApartmentSarah.AddHotspot(145, 300, 195, 260, hsLight); // light on end table
+    ApartmentSarah.AddHotspot(445, 40, 1420, 0, hsBackUp); // back up to full apartment view
+    ApartmentSarah.AddHotspot(475, 620, 610, 500, hsLight); // light on end table
 
     // Load objects
 
@@ -59,8 +59,7 @@ void InitOpenGL(void)
 
     // windowsize, position, and title
     //glutInitWindowSize(SCREENWIDTH, SCREENHEIGHT);
-    //glutInitWindowPosition(100, 50);
-   // glutInitWindowPosition(0, 0);
+    //glutInitWindowPosition(0, 0);
     glutCreateWindow("Twilight in Massachusetts");
 
     glutFullScreen();
@@ -103,7 +102,7 @@ int main(int argc, char* argv[])
 {
     // FIXME: load game if given a game file
 
-    // initialize game
+    // load backgrounds and etc for the game
     InitGame();
 
     // OpenGL init

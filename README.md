@@ -1,7 +1,7 @@
 # Twilight in Massachusetts - A Christine Sorney Mystery
 *Note: Game is not completed yet*
 
-This is definitely *not* a spite game against against a Female Software company 
+This is definitely *not* a spite game against a Female Software company 
 and their recent lack of producing mystery games starring a Fancy detective.
 
 ## Description
