@@ -3,7 +3,7 @@
 #include "place.h"
 #include <GL/freeglut.h>
 
-Place :: Place()
+Place::Place()
 : m_name("")
 , m_dayBGroundFile("")
 , m_nightBGroundFile("")
@@ -14,7 +14,7 @@ Place :: Place()
 {
 }
 
-Place :: Place(const char* name, const char* dayBGroundFile,
+Place::Place(const char* name, const char* dayBGroundFile,
                const char* nightBGroundFile, unsigned char* imagePtrDay,
                unsigned char* imagePtrNight, idPlace placeId, std::vector<Hotspot> hotspots)
 : m_name(name)
@@ -27,7 +27,7 @@ Place :: Place(const char* name, const char* dayBGroundFile,
 {
 }
 
-Place :: ~Place()
+Place::~Place()
 {
     if(m_imagePtrDay != NULL)
     {
@@ -40,18 +40,18 @@ Place :: ~Place()
 }
 
 // setters and getters
-int Place :: SetName(const char* name)
+int Place::SetName(const char* name)
 {
     m_name = name;
     return 1;
 }
 
-const char* Place :: GetName(void)
+const char* Place::GetName(void)
 {
     return m_name;
 }
 
-int Place :: SetBGroundFile(const char* bGroundFile, int time)
+int Place::SetBGroundFile(const char* bGroundFile, int time)
 {
     if(time == NIGHTTIME) // night
     {
@@ -65,7 +65,7 @@ int Place :: SetBGroundFile(const char* bGroundFile, int time)
     }
 }
 
-const char* Place :: GetBGroundFile(int time)
+const char* Place::GetBGroundFile(int time)
 {
     if(time == NIGHTTIME) // night
     {
@@ -77,17 +77,17 @@ const char* Place :: GetBGroundFile(int time)
     }
 }
 
-unsigned char* Place :: GetImagePtrDay(void)
+unsigned char* Place::GetImagePtrDay(void)
 {
     return m_imagePtrDay;
 }
 
-unsigned char* Place :: GetImagePtrNight(void)
+unsigned char* Place::GetImagePtrNight(void)
 {
     return m_imagePtrNight;
 }
 
-unsigned char* Place :: GetImagePtr(int time)
+unsigned char* Place::GetImagePtr(int time)
 {
     if(time == DAYTIME)
     {
@@ -99,13 +99,13 @@ unsigned char* Place :: GetImagePtr(int time)
     }
 }
 
-idPlace Place :: GetPlaceId(void)
+idPlace Place::GetPlaceId(void)
 {
     return m_placeId;
 }
 
 // adds an existing hotspot to the list
-int Place :: AddHotspot(Hotspot h)
+int Place::AddHotspot(Hotspot h)
 {
     std::vector<Hotspot>::iterator it;
     it = m_hotspots.begin();
@@ -116,7 +116,7 @@ int Place :: AddHotspot(Hotspot h)
 }
 
 // creates new hotspot before adding to the list of hotspots
-int Place :: AddHotspot(int x1, int y1, int x2, int y2, idHotspot id)
+int Place::AddHotspot(int x1, int y1, int x2, int y2, idHotspot id)
 {
     Hotspot t_hs(x1, y1, x2, y2, id);
 
@@ -130,13 +130,13 @@ int Place :: AddHotspot(int x1, int y1, int x2, int y2, idHotspot id)
     return 1;
 }
 
-int Place :: RemoveHotspot(Hotspot h)
+int Place::RemoveHotspot(Hotspot h)
 {
     return -1;
 }
 
 // FIXME: I don't think this is needed anymore
-void Place :: GoToLocation(int time)
+void Place::GoToLocation(int time)
 {
     CURRENT_PLACE = m_placeId;
     CURRENT_TIME = time;
@@ -144,7 +144,7 @@ void Place :: GoToLocation(int time)
     return;
 }
 
-idHotspot Place :: CheckHotspotsHovered(int x, int y)
+idHotspot Place::CheckHotspotsHovered(int x, int y)
 {
     idHotspot t_id = -1;
 
@@ -172,7 +172,7 @@ idHotspot Place :: CheckHotspotsHovered(int x, int y)
     return -1;
 }
 
-void Place :: DeleteBackgrounds(void)
+void Place::DeleteBackgrounds(void)
 {
     if(m_imagePtrDay != NULL)
     {
@@ -189,7 +189,7 @@ void Place :: DeleteBackgrounds(void)
 }
 
 //Author: Sam Buss December 2001
-int Place :: LoadBackground(int time)
+int Place::LoadBackground(int time)
 {
     const char* filename;
 
@@ -352,7 +352,7 @@ int Place :: LoadBackground(int time)
 }
 
 // Author: Dr. John Weiss, *THE* Weiss of the Weiss Distribution Method
-void Place :: SkipChars(FILE* infile, int numChars)
+void Place::SkipChars(FILE* infile, int numChars)
 {
     for(int i = 0; i < numChars; i++)
     {
@@ -361,13 +361,13 @@ void Place :: SkipChars(FILE* infile, int numChars)
 }
 
 // Author: Dr. John Weiss
-int Place :: GetNumBytesPerRow(int NumCols)
+int Place::GetNumBytesPerRow(int NumCols)
 {
     return ((3 * NumCols + 3) >> 2) << 2;
 }
 
 // Author: Dr. John Weiss
-int Place :: ReadLong(FILE* infile)
+int Place::ReadLong(FILE* infile)
 {
     unsigned char byte0, byte1, byte2, byte3;
 
@@ -390,7 +390,7 @@ int Place :: ReadLong(FILE* infile)
 }
 
 // Author: Dr. John Weiss
-short Place :: ReadShort(FILE* infile)
+short Place::ReadShort(FILE* infile)
 {
     unsigned char lowByte, hiByte;
 

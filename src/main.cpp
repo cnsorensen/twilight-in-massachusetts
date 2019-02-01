@@ -18,7 +18,7 @@ void InitGame(void)
 {
     // initialize values
 
-	// FIXME: should I be loading *everything* at startup?
+    // FIXME: should I be loading *everything* at startup?
     // Load all backgrounds
     Downtown.LoadBackground(DAYTIME);
     Downtown.LoadBackground(NIGHTTIME);
@@ -68,7 +68,7 @@ void InitOpenGL(void)
     // FIXME: do I put this here? or just in display?
     //glClear(GL_COLOR_BUFFER_BIT);
 
-	// FIXME: do I do this here or in display?
+    // FIXME: do I do this here or in display?
     // black background
     //glClearColor(0.0, 0.0, 0.0, 0.0);
     // dark purple background

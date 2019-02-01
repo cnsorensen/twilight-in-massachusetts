@@ -10,34 +10,34 @@
 //#include "persons.h"
 //#include "place.h"
 
-Game :: Game()
+Game::Game()
 : m_title("")
 {
 }
 
-Game :: Game(const char* title)
+Game::Game(const char* title)
 : m_title(title)
 {
 }
 
-Game :: ~Game()
+Game::~Game()
 {
 }
 
 // setters and getters
-int Game :: SetTitle(const char* title)
+int Game::SetTitle(const char* title)
 {
     m_title = title;
     return 1;
 }
 
-const char* Game :: GetTitle(void)
+const char* Game::GetTitle(void)
 {
     return m_title;
 }
 
 // functions
-void Game :: Run()
+void Game::Run()
 {
     for(int i = 0; i < 2; i++)
     {
@@ -47,7 +47,7 @@ void Game :: Run()
     return;
 }
 
-void Game :: LoadGame(const char* fileName)
+void Game::LoadGame(const char* fileName)
 {
     int val;
     FILE* gameFile;
@@ -106,7 +106,7 @@ void Game :: LoadGame(const char* fileName)
     return;
 }
 
-void Game :: SaveGame(void)
+void Game::SaveGame(void)
 {
     //int i;
     int val;

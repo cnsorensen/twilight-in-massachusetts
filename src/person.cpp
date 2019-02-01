@@ -8,7 +8,7 @@
 
 // constructors
 
-Person :: Person()
+Person::Person()
 : m_fName("")
 , m_lName("")
 , m_age(-1)
@@ -17,7 +17,7 @@ Person :: Person()
 {
 }
 
-Person :: Person(const char* fName, const char* lName, int age, const char* hello, const char* bye)
+Person::Person(const char* fName, const char* lName, int age, const char* hello, const char* bye)
 : m_fName(fName)
 , m_lName(lName)
 , m_age(age)
@@ -28,76 +28,76 @@ Person :: Person(const char* fName, const char* lName, int age, const char* hell
 
 // destructors
 
-Person :: ~Person()
+Person::~Person()
 {
 }
 
 // setters and getters
 
-int Person :: SetFirstName(const char* fName)
+int Person::SetFirstName(const char* fName)
 {
     m_fName = fName;
 
     return 1;
 }
 
-const char* Person :: GetFirstName(void)
+const char* Person::GetFirstName(void)
 {
     return m_fName;
 }
 
-int Person :: SetLastName(const char* lName)
+int Person::SetLastName(const char* lName)
 {
     m_lName = lName;
 
     return 1;
 }
 
-const char* Person :: GetLastName(void)
+const char* Person::GetLastName(void)
 {
     return m_lName;
 }
 
 //FIXME: do we need this?
-int Person :: SetAge(int age)
+int Person::SetAge(int age)
 {
     m_age = age;
 
     return 1;
 }
 
-int Person :: GetAge(void)
+int Person::GetAge(void)
 {
     return m_age;
 }
 
-int Person :: SetHello(const char* hello)
+int Person::SetHello(const char* hello)
 {
     // FIXME: make array of hellos and randomnly pick one
     m_hello = hello;
     return 1;
 }
 
-const char* Person :: GetHello(void)
+const char* Person::GetHello(void)
 {
     return m_hello;
 }
 
-int Person :: SetGoodbye(const char* bye)
+int Person::SetGoodbye(const char* bye)
 {
     // FIXME: make array of byes and randomly pick one
     m_goodbye = bye;
     return 1;
 }
 
-const char* Person :: GetGoodbye(void)
+const char* Person::GetGoodbye(void)
 {
     return m_goodbye;
 }
 
 // FIXME: need to implement
 /*
-int Person :: Speak(const char* dialog, int name_f, int type_f, int reply_num)
+int Person::Speak(const char* dialog, int name_f, int type_f, int reply_num)
 {
     int len;
     len = strlen(dialog);

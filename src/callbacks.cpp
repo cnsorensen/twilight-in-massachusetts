@@ -21,7 +21,7 @@ void display(void)
     // width padding for the background
     //float wPadding;
 
-	// FIXME: for debugging purposes
+    // FIXME: for debugging purposes
     //int window_w = glutGet(GLUT_WINDOW_WIDTH);
     //int window_h = glutGet(GLUT_WINDOW_HEIGHT);
     //int screen_w = glutGet(GLUT_SCREEN_WIDTH);
@@ -29,14 +29,14 @@ void display(void)
 
     // get screen size
     if(TEMP_COUNT2 < 4)
-    { 
+    {
         SCREENWIDTH = glutGet(GLUT_SCREEN_WIDTH);
         SCREENHEIGHT = glutGet(GLUT_SCREEN_HEIGHT);
         TEMP_COUNT2++;
     }
 
     // calculate border padding
-	wPadding = (SCREENWIDTH - iBackgroundWidth) / 2;
+    wPadding = (SCREENWIDTH - iBackgroundWidth) / 2;
 
     // background color - dark purple
     // FIXME: Does this go here?
@@ -48,19 +48,19 @@ void display(void)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-	glOrtho(0.0f, SCREENWIDTH, SCREENHEIGHT, 0.0, 0.0, 1.f);
+    glOrtho(0.0f, SCREENWIDTH, SCREENHEIGHT, 0.0, 0.0, 1.f);
 
     GLuint texID;
     glGenTextures(1, &texID);
-	glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texID);
 
     // draw window background based on current location and time
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight,
-                 0, GL_RGB, GL_UNSIGNED_BYTE, pCurrentLocation->GetImagePtr(CURRENT_TIME));
-	
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iBackgroundWidth, iBackgroundHeight, 0,
+                 GL_RGB, GL_UNSIGNED_BYTE, pCurrentLocation->GetImagePtr(CURRENT_TIME));
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
     // FIXME: everywhere else fixes upsidedown coordinates
     glBegin(GL_QUADS);
@@ -70,7 +70,7 @@ void display(void)
         glTexCoord2f(1.0, 0.0); glVertex2d(SCREENWIDTH - wPadding, SCREENHEIGHT);
     glEnd();
 
-	glDisable(GL_TEXTURE_2D);
+    glDisable(GL_TEXTURE_2D);
 
     // FIXME: should do an implicit glFlush() here??
     //glutSwapBuffers(); // for double buffering
@@ -136,11 +136,11 @@ void keyboard(unsigned char key, int x, int y)
         case 'q':
         case 27: //escape key
             // delete everything
-            // FIXME: why 
+            // FIXME: why
             for(int i = 0; i < PlacesCount; i++)
             {
                 Places[i].DeleteBackgrounds();
-            } 
+            }
             exit(0);
             break;
         default:
